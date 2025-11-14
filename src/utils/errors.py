@@ -1,0 +1,2 @@
+class StackIsEmpty(Exception):
+    pass

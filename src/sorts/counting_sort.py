@@ -7,8 +7,6 @@ class Counting_sort:
 
         result: list[int] = []
         for i in range(n + 1):
-            while lst[i] != 0:
-                result.append(i)
-                lst[i] -= 1
+            result.extend([i] * lst[i])
 
         return result
