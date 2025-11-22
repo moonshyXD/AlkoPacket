@@ -1,45 +1,13 @@
-from abc import ABC, abstractmethod
+from collections import deque
 
-from utils.errors import StackIsEmpty
-
-
-class Stack(ABC):
-    @abstractmethod
-    def push(self, value: int) -> None:
-        pass
-
-    @abstractmethod
-    def pop(self) -> int:
-        pass
-
-    @abstractmethod
-    def is_empty(self) -> bool:
-        pass
-
-    @abstractmethod
-    def peek(self) -> int:
-        pass
-
-    @abstractmethod
-    def __len__(self) -> int:
-        pass
-
-    @abstractmethod
-    def min(self) -> int:
-        pass
-
-
-class Node:
-    def __init__(self, value: int, min_value: int, next_node=None):
-        self.value = value
-        self.cur_min = min_value
-        self.next = next_node
+from src.utils.base import Node, Stack
+from src.utils.errors import StackIsEmpty
 
 
 class StackOnLinkedList(Stack):
-    def __init__(self):
-        self.head = None
-        self.size = 0
+    def __init__(self) -> None:
+        self.head: Node | None = None
+        self.size: int = 0
 
     def push(self, value: int) -> None:
         if self.head is None:
@@ -47,13 +15,12 @@ class StackOnLinkedList(Stack):
         else:
             min_value = min(value, self.head.cur_min)
 
-        node = Node(value, min_value, self.head)
-        self.head = node
+        self.head = Node(value, min_value, self.head)
         self.size += 1
 
     def pop(self) -> int:
         if self.head is None:
-            raise StackIsEmpty
+            raise StackIsEmpty("Стэк пуст")
 
         result = self.head.value
         self.head = self.head.next
@@ -81,9 +48,9 @@ class StackOnLinkedList(Stack):
 
 
 class StackOnList(Stack):
-    def __init__(self):
-        self.stack = []
-        self.min_values = []
+    def __init__(self) -> None:
+        self.stack: list[int] = []
+        self.min_values: list[int] = []
 
     def push(self, value: int) -> None:
         if not self.min_values or value <= self.min_values[-1]:
@@ -120,12 +87,10 @@ class StackOnList(Stack):
 
 
 class StackOnQueue(Stack):
-    def __init__(self):
-        from collections import deque
-
-        self.queue1 = deque()
-        self.queue2 = deque()
-        self.min_values = deque()
+    def __init__(self) -> None:
+        self.queue1: deque[int] = deque()
+        self.queue2: deque[int] = deque()
+        self.min_values: deque[int] = deque()
 
     def push(self, value: int) -> None:
         self.queue1.append(value)

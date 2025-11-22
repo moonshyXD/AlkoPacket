@@ -8,3 +8,17 @@ dependencies = [
     "pytest>=8.4.2",
     "ruff>=0.14.4",
 ]
+
+[tool.ruff]
+line-length = 79
+target-version = 'py312'
+
+[tool.ruff.lint]
+fixable = ['ALL']
+select = ['E', 'F', 'I', 'B']
+
+[tool.mypy]
+python_version = '3.12'
+disallow_untyped_defs = true
+ignore_missing_imports = true
+strict_optional = true

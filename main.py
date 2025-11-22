@@ -2,7 +2,7 @@ from src.factorial_fibonachi.fibonachi import Fibonachi
 from src.sorts.counting_sort import Counting_sort
 
 
-class Lab3():
+class Lab3:
     def __init__(self):
         self.fib = Fibonachi()
         self.c_sort = Counting_sort()

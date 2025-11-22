@@ -3,7 +3,7 @@ class Fibonachi:
         f0 = 0
         f1 = 1
         result: int
-        for i in range(n):
+        for _ in range(n):
             result = f0 + f1
             f0, f1 = f1, result
 
