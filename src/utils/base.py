@@ -58,3 +58,9 @@ class Node:
         self.value = value
         self.cur_min = min_value
         self.next = next_node
+
+
+class Sort(ABC):
+    @abstractmethod
+    def execute(self, *argc, **kwargs):
+        pass

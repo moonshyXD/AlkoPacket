@@ -1,4 +1,7 @@
-class Bubble_sort:
+from src.utils.base import Sort
+
+
+class BubbleSort(Sort):
     def execute(self, arr: list[int]) -> list[int]:
         n = len(arr)
         result = arr.copy()

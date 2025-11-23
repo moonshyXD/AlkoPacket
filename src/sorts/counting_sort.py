@@ -1,4 +1,7 @@
-class Counting_sort:
+from src.utils.base import Sort
+
+
+class CountingSort(Sort):
     def execute(self, arr: list[int]) -> list[int]:
         n = max(arr)
         lst = [0] * (n + 1)

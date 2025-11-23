@@ -1,4 +1,7 @@
-class Radix_sort:
+from src.utils.base import Sort
+
+
+class RadixSort(Sort):
     def execute(self, arr: list[int]) -> list[int]:
         pass
 
