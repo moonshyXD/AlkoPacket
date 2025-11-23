@@ -1,36 +1,47 @@
 import random
 
+from src.utils.errors import TestCasesError
+
 
 class TestCases:
-    def _set_seed(self, seed: int | None = None) -> None:
+    @staticmethod
+    def _set_seed(seed: int | None = None) -> None:
         if seed is not None:
             random.seed(seed)
 
+    @staticmethod
     def rand_int_array(
-        self,
         n: int,
         lo: int,
         hi: int,
         distinct: bool = False,
         seed: int | None = None,
     ) -> list[int]:
-        self._set_seed(seed)
+        TestCases._set_seed(seed)
+
+        if distinct and n > (hi - lo + 1):
+            raise TestCasesError(
+                f"Невозможно сгенерировать {n}",
+                f"неповторяющихся элементов в промежутке [{lo}, {hi}]",
+            )
 
         if distinct:
             return random.sample(range(lo, hi + 1), n)
 
         return [random.randint(lo, hi) for _ in range(n)]
 
+    @staticmethod
     def rand_float_array(
-        self, n: int, lo: float = 0.0, hi: float = 1.0, seed: int | None = None
+        n: int, lo: float = 0.0, hi: float = 1.0, seed: int | None = None
     ) -> list[float]:
-        self._set_seed(seed)
+        TestCases._set_seed(seed)
         return [random.uniform(lo, hi) for _ in range(n)]
 
+    @staticmethod
     def nearly_sorted(
-        self, n: int, swaps: int, seed: int | None = None
+        n: int, swaps: int, seed: int | None = None
     ) -> list[int]:
-        self._set_seed(seed)
+        TestCases._set_seed(seed)
         array = list(range(n))
 
         for _ in range(swaps):
@@ -40,12 +51,14 @@ class TestCases:
 
         return array
 
-    def reverse_sorted(self, n: int) -> list[int]:
+    @staticmethod
+    def reverse_sorted(n: int) -> list[int]:
         return list(range(n - 1, -1, -1))
 
+    @staticmethod
     def many_duplicates(
-        self, n: int, k_unique: int = 5, seed: int | None = None
+        n: int, k_unique: int = 5, seed: int | None = None
     ) -> list[int]:
-        self._set_seed(seed)
-        unique_values = list(range(k_unique))
-        return [random.choice(unique_values) for _ in range(n)]
+        TestCases._set_seed(seed)
+        values = list(range(k_unique))
+        return [random.choice(values) for _ in range(n)]

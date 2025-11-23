@@ -1,7 +1,7 @@
-from src.utils.base import Sort
+from src.utils.base import BaseSort
 
 
-class BucketSort(Sort):
+class BucketSort(BaseSort):
     @staticmethod
     def execute(arr: list[float], buckets: int | None = None) -> list[float]:
         if buckets is None:

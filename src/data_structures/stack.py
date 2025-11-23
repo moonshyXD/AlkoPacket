@@ -1,10 +1,10 @@
 from collections import deque
 
-from src.utils.base import Node, Stack
+from src.utils.base import BaseStack, Node
 from src.utils.errors import StackIsEmpty
 
 
-class StackOnLinkedList(Stack):
+class StackOnLinkedList(BaseStack):
     def __init__(self) -> None:
         self.head: Node | None = None
         self.size: int = 0
@@ -47,7 +47,7 @@ class StackOnLinkedList(Stack):
         return self.head.cur_min
 
 
-class StackOnList(Stack):
+class StackOnList(BaseStack):
     def __init__(self) -> None:
         self.stack: list[int] = []
         self.min_values: list[int] = []
@@ -86,7 +86,7 @@ class StackOnList(Stack):
         return self.min_values[-1]
 
 
-class StackOnQueue(Stack):
+class StackOnQueue(BaseStack):
     def __init__(self) -> None:
         self.queue1: deque[int] = deque()
         self.queue2: deque[int] = deque()

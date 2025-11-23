@@ -1,7 +1,7 @@
-from src.utils.base import Sort
+from src.utils.base import BaseSort
 
 
-class HeapSort(Sort):
+class HeapSort(BaseSort):
     @staticmethod
     def execute(arr: list[int]) -> list[int]:
         arr = arr.copy()

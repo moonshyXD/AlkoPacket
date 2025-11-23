@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 
-class Queue(ABC):
+class BaseQueue(ABC):
     @abstractmethod
     def push(self, value: int) -> None:
         pass
@@ -27,7 +28,7 @@ class Queue(ABC):
         pass
 
 
-class Stack(ABC):
+class BaseStack(ABC):
     @abstractmethod
     def push(self, value: int) -> None:
         pass
@@ -54,14 +55,16 @@ class Stack(ABC):
 
 
 class Node:
-    def __init__(self, value: int, min_value: int, next_node=None):
-        self.value = value
-        self.cur_min = min_value
-        self.next = next_node
+    def __init__(
+        self, value: int, min_value: int, next_node: "Node | None" = None
+    ) -> None:
+        self.value: int = value
+        self.cur_min: int = min_value
+        self.next: Node | None = next_node
 
 
-class Sort(ABC):
+class BaseSort(ABC):
     @staticmethod
     @abstractmethod
-    def execute(cls, *argc, **kwargs):
+    def execute(*args: Any, **kwargs: Any) -> Any:
         pass

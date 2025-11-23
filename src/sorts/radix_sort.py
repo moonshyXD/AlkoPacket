@@ -1,7 +1,7 @@
-from src.utils.base import Sort
+from src.utils.base import BaseSort
 
 
-class RadixSort(Sort):
+class RadixSort(BaseSort):
     @staticmethod
     def execute(arr: list[int]) -> list[int]:
         max_num = max(arr)

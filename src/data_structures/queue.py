@@ -1,9 +1,9 @@
 from src.data_structures.stack import StackOnList
-from src.utils.base import Node, Queue
+from src.utils.base import BaseQueue, Node
 from src.utils.errors import QueueIsEmpty
 
 
-class QueueOnLinkedList(Queue):
+class QueueOnLinkedList(BaseQueue):
     def __init__(self) -> None:
         self.head: Node | None = None
         self.tail: Node | None = None
@@ -45,7 +45,7 @@ class QueueOnLinkedList(Queue):
         return self.size
 
 
-class QueueOnList(Queue):
+class QueueOnList(BaseQueue):
     def __init__(self) -> None:
         self.queue: list[int] = []
 
@@ -71,7 +71,7 @@ class QueueOnList(Queue):
         return len(self.queue)
 
 
-class QueueOnStack(Queue):
+class QueueOnStack(BaseQueue):
     def __init__(self) -> None:
         self.stack_in: StackOnList = StackOnList()
         self.stack_out: StackOnList = StackOnList()

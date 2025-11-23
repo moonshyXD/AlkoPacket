@@ -1,7 +1,7 @@
-from src.utils.base import Sort
+from src.utils.base import BaseSort
 
 
-class QuickSort(Sort):
+class QuickSort(BaseSort):
     @staticmethod
     def execute(arr: list[int]) -> list[int]:
         if len(arr) <= 1:

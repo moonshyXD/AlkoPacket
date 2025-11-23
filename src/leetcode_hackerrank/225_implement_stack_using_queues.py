@@ -1,18 +1,19 @@
-class MyStack(object):
-    def __init__(self):
-        from collections import deque
+from collections import deque
 
-        self.q1 = deque()
-        self.q2 = deque()
 
-    def push(self, x):
+class MyStack:
+    def __init__(self) -> None:
+        self.q1: deque[int] = deque()
+        self.q2: deque[int] = deque()
+
+    def push(self, x: int) -> None:
         """
         :type x: int
         :rtype: None
         """
         self.q1.append(x)
 
-    def pop(self):
+    def pop(self) -> int:
         """
         :rtype: int
         """
@@ -24,7 +25,7 @@ class MyStack(object):
 
         return result
 
-    def top(self):
+    def top(self) -> int:
         """
         :rtype: int
         """
@@ -37,7 +38,7 @@ class MyStack(object):
 
         return result
 
-    def empty(self):
+    def empty(self) -> bool:
         """
         :rtype: bool
         """

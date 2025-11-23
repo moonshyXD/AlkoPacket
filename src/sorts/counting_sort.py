@@ -1,7 +1,7 @@
-from src.utils.base import Sort
+from src.utils.base import BaseSort
 
 
-class CountingSort(Sort):
+class CountingSort(BaseSort):
     @staticmethod
     def execute(arr: list[int]) -> list[int]:
         n = max(arr)

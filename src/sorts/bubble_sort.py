@@ -1,7 +1,7 @@
-from src.utils.base import Sort
+from src.utils.base import BaseSort
 
 
-class BubbleSort(Sort):
+class BubbleSort(BaseSort):
     @staticmethod
     def execute(arr: list[int]) -> list[int]:
         n = len(arr)

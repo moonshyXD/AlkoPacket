@@ -1,5 +1,6 @@
 class Fibonachi:
-    def fibo(self, n: int) -> int:
+    @staticmethod
+    def fibo(n: int) -> int:
         f0 = 0
         f1 = 1
         result: int
@@ -9,11 +10,13 @@ class Fibonachi:
 
         return result
 
-    def fibo_recursive(self, n: int) -> int:
+    @staticmethod
+    def fibo_recursive(n: int) -> int:
         if n in [0, 1]:
             return n
 
-        return self.fibo(n - 1) + self.fibo(n - 2)
+        return Fibonachi.fibo(n - 1) + Fibonachi.fibo(n - 2)
 
-    def fibo_O1(self, int: int) -> int:
+    @staticmethod
+    def fibo_O1(int: int) -> int:
         pass

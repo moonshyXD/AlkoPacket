@@ -1,18 +1,19 @@
-class MyQueue(object):
-    def __init__(self):
-        from collections import deque
+from collections import deque
 
-        self.stack1 = deque()
-        self.stack2 = deque()
 
-    def push(self, x):
+class MyQueue:
+    def __init__(self) -> None:
+        self.stack1: deque[int] = deque()
+        self.stack2: deque[int] = deque()
+
+    def push(self, x: int) -> None:
         """
         :type x: int
         :rtype: None
         """
         self.stack1.append(x)
 
-    def pop(self):
+    def pop(self) -> int:
         """
         :rtype: int
         """
@@ -26,7 +27,7 @@ class MyQueue(object):
 
         return result
 
-    def peek(self):
+    def peek(self) -> int:
         """
         :rtype: int
         """
@@ -40,7 +41,7 @@ class MyQueue(object):
 
         return result
 
-    def empty(self):
+    def empty(self) -> bool:
         """
         :rtype: bool
         """
@@ -51,5 +52,3 @@ class MyQueue(object):
 # obj = MyQueue()
 # obj.push(x)
 # param_2 = obj.pop()
-# param_3 = obj.peek()
-# param_4 = obj.empty()

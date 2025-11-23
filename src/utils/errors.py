@@ -1,6 +1,14 @@
-class StackIsEmpty(Exception):
+class AlgoPacketError(Exception):
     pass
 
 
-class QueueIsEmpty(Exception):
+class StackIsEmpty(AlgoPacketError):
+    pass
+
+
+class QueueIsEmpty(AlgoPacketError):
+    pass
+
+
+class TestCasesError(AlgoPacketError):
     pass
