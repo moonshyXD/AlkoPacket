@@ -1,15 +1,14 @@
 from src.factorial_fibonachi.fibonachi import Fibonachi
-from src.sorts.counting_sort import Counting_sort
+from src.sorts.heap_sort import HeapSort
 
 
 class Lab3:
     def __init__(self):
         self.fib = Fibonachi()
-        self.c_sort = Counting_sort()
 
     def run(self) -> None:
         test = [10, 1, 20, 20, 5, 100]
-        result = self.c_sort.execute(test)
+        result = HeapSort.execute(test)
         print(result)
 
 

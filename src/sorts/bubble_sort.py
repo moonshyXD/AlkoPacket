@@ -2,7 +2,8 @@ from src.utils.base import Sort
 
 
 class BubbleSort(Sort):
-    def execute(self, arr: list[int]) -> list[int]:
+    @staticmethod
+    def execute(arr: list[int]) -> list[int]:
         n = len(arr)
         result = arr.copy()
         for i in range(n):

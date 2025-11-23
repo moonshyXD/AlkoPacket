@@ -61,6 +61,7 @@ class Node:
 
 
 class Sort(ABC):
+    @staticmethod
     @abstractmethod
-    def execute(self, *argc, **kwargs):
+    def execute(cls, *argc, **kwargs):
         pass

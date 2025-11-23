@@ -2,7 +2,8 @@ from src.utils.base import Sort
 
 
 class QuickSort(Sort):
-    def execute(self, arr: list[int]) -> list[int]:
+    @staticmethod
+    def execute(arr: list[int]) -> list[int]:
         if len(arr) <= 1:
             return arr
 
@@ -18,4 +19,8 @@ class QuickSort(Sort):
             else:
                 equal.append(number)
 
-        return self.execute(less_than) + equal + self.execute(higher_than)
+        return (
+            QuickSort.execute(less_than)
+            + equal
+            + QuickSort.execute(higher_than)
+        )

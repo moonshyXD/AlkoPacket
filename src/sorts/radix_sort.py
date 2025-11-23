@@ -2,11 +2,29 @@ from src.utils.base import Sort
 
 
 class RadixSort(Sort):
-    def execute(self, arr: list[int]) -> list[int]:
-        pass
+    @staticmethod
+    def execute(arr: list[int]) -> list[int]:
+        max_num = max(arr)
+        step = 1
 
-    def LSD(self, arr: list[int]) -> list[int]:
-        pass
+        while max_num // step > 0:
+            n = len(arr)
+            res = [0] * n
+            count = [0] * 10
 
-    def MSD(self, arr: list[int]) -> list[int]:
-        pass
+            for num in arr:
+                index = (num // step) % 10
+                count[index] += 1
+
+            for i in range(1, 10):
+                count[i] += count[i - 1]
+
+            for i in range(n - 1, -1, -1):
+                index = (arr[i] // step) % 10
+                res[count[index] - 1] = arr[i]
+                count[index] -= 1
+
+            for i in range(n):
+                arr[i] = res[i]
+
+            step *= 10
