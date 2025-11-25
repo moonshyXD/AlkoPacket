@@ -1,5 +1,5 @@
 class Solution(object):
-    def fib(self, n):
+    def fib(self, n: int) -> int:
         """
         :type n: int
         :rtype: int

@@ -6,3 +6,11 @@ lint:
 	ruff check --fix
 	ruff check .
 	mypy .
+
+.PHONY: run
+run:
+	uv run main.py
+
+.PHONY: setup
+setup:
+	uv sync

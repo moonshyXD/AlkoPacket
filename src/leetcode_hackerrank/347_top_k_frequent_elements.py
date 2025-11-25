@@ -1,5 +1,5 @@
 class Solution(object):
-    def topKFrequent(self, nums, k):
+    def topKFrequent(self, nums: list[int], k: int) -> list[int]:
         """
         :type nums: List[int]
         :type k: int
