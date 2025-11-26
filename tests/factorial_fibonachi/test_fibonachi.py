@@ -16,4 +16,11 @@ from src.factorial_fibonachi.fibonachi import Fibonachi
     ],
 )
 def test_fibonacci(func: Any, n: int, expected: int) -> None:
+    """
+    Проверка результатов для итеративных и рекурсивных чисел Фибоначчи.
+    :param func: Функция вычисления чисел Фибоначчи.
+    :param n: Входное число.
+    :param expected: Ожидаемый результат.
+    :return: None.
+    """
     assert func(n) == expected

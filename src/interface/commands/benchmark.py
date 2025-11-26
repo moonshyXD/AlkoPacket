@@ -1,3 +1,4 @@
+from functools import partial
 from typing import Any, Callable
 
 import typer
@@ -6,21 +7,6 @@ from src.interface.config import sort_command_map
 from src.sorts.bucket_sort import BucketSort
 from src.utils.benchmarks import Benchmarks
 from src.utils.test_cases import TestCases
-
-
-def _make_sort_wrapper(
-    func: Callable[..., list[Any]],
-) -> Callable[[list[Any]], list[Any]]:
-    """
-    Создает обертку для функции сортировки с параметрами key и cmp.
-    :param func: Функция сортировки.
-    :return: Обернутая функция сортировки.
-    """
-
-    def wrapper(arr: list[Any]) -> list[Any]:
-        return func(arr, None, None)
-
-    return wrapper
 
 
 def run_benchmark() -> None:
@@ -52,7 +38,7 @@ def run_benchmark() -> None:
         if name in ["Radix-sort", "Counting-sort"]:
             int_algos[name] = func
         else:
-            int_algos[name] = _make_sort_wrapper(func)
+            int_algos[name] = partial(func, key=None, cmp=None)
 
     typer.echo(f"Запуск бенчмарка на {n} элементах...")
     typer.echo(

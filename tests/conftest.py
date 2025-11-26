@@ -2,64 +2,76 @@ from typing import Any
 
 import pytest
 
-from src.wrappers.test_cases import TestCases
+from src.utils.test_cases import TestCases
 
 
 @pytest.fixture
 def sample_array() -> list[int]:
+    """
+    Фикстура с тестовым массивом.
+    :return: Массив случайных чисел.
+    """
     return TestCases.rand_int_array(8, 1, 9, seed=42)
 
 
 @pytest.fixture
 def sorted_array() -> list[int]:
+    """
+    Фикстура с отсортированным массивом.
+    :return: Массив от 1 до 5.
+    """
     return list(range(1, 6))
 
 
 @pytest.fixture
 def reverse_sorted_array() -> list[int]:
+    """
+    Фикстура с обратно отсортированным массивом.
+    :return: Массив в обратном порядке.
+    """
     return TestCases.reverse_sorted(5)
 
 
 @pytest.fixture
 def empty_array() -> list[Any]:
+    """
+    Фикстура с пустым массивом.
+    :return: Пустой массив.
+    """
     return []
 
 
 @pytest.fixture
 def single_element_array() -> list[int]:
+    """
+    Фикстура с одним элементом.
+    :return: Массив [42].
+    """
     return [42]
 
 
 @pytest.fixture
 def duplicates_array() -> list[int]:
+    """
+    Фикстура с массивом с дубликатами.
+    :return: Массив с повторяющимися элементами.
+    """
     return TestCases.many_duplicates(7, k_unique=3, seed=42)
 
 
 @pytest.fixture
 def negative_numbers() -> list[int]:
+    """
+    Фикстура с отрицательными числами.
+    :return: Массив отрицательных чисел.
+    """
     return TestCases.rand_int_array(5, -5, -1, seed=42)
 
 
 @pytest.fixture
 def mixed_numbers() -> list[int]:
+    """
+    Фикстура со смешанными числами.
+    :return: Массив с положительными и отрицательными числами.
+    """
     return TestCases.rand_int_array(5, -3, 3, seed=42)
-
-
-@pytest.fixture
-def nearly_sorted_array() -> list[int]:
-    return TestCases.nearly_sorted(10, swaps=2, seed=42)
-
-
-@pytest.fixture
-def large_array() -> list[int]:
-    return TestCases.rand_int_array(100, 0, 1000, seed=42)
-
-
-@pytest.fixture
-def float_array() -> list[float]:
-    return TestCases.rand_float_array(10, 0.0, 10.0, seed=42)
-
-
-@pytest.fixture
-def distinct_array() -> list[int]:
-    return TestCases.rand_int_array(10, 0, 50, distinct=True, seed=42)

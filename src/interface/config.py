@@ -20,8 +20,6 @@ from src.sorts.quick_sort import QuickSort
 from src.sorts.radix_sort import RadixSort
 from src.utils.base import BaseQueue, BaseStack
 
-SortFunction = Callable[..., list[Any]]
-
 cmp_map: dict[str, Callable[[Any, Any], int] | None] = {
     "default": None,
     "reverse": lambda a, b: (b > a) - (b < a),
@@ -33,7 +31,7 @@ key_map: dict[str, Callable[[Any], Any] | None] = {
     "len": len,
 }
 
-sort_command_map: dict[str, SortFunction] = {
+sort_command_map: dict[str, Callable[..., list[Any]]] = {
     "Bubble-sort": BubbleSort.execute,
     "Bucket-sort": BucketSort.execute,
     "Counting-sort": CountingSort.execute,

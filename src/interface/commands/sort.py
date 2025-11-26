@@ -8,7 +8,7 @@ from src.utils.test_cases import TestCases
 
 def _get_array() -> list[Any] | None:
     """
-    Интерактивно получает массив от пользователя.
+    Получает массив от пользователя.
     :return: Массив данных или None при ошибке ввода.
     """
     typer.echo("Как получить массив для сортировки (введите цифру)?")
@@ -116,7 +116,7 @@ def _get_array() -> list[Any] | None:
 
 def run_sorts() -> None:
     """
-    Запускает интерактивный выбор и выполнение сортировки.
+    Запускает выбор и выполнение сортировки.
     :return: None.
     """
     sort_type = typer.prompt(
@@ -190,7 +190,3 @@ def run_sorts() -> None:
         )
     except TypeError as e:
         typer.echo(f"Ошибка сортировки: {e}", err=True)
-        typer.echo(
-            "Возможно, выбран несовместимый ключ для данного типа данных.",
-            err=True,
-        )

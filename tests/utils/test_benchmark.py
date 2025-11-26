@@ -1,45 +1,54 @@
-from typing import Any
+from typing import Callable
 
-from src.wrappers.benchmarks import Benchmarks
+from src.utils.benchmarks import Benchmarks
 
 
 class TestBenchmarks:
-    def test_timeit_once(self) -> None:
-        bench = Benchmarks()
-        time_taken = bench.timeit_once(lambda x: x * 2, 5)
-        assert time_taken >= 0
-        assert isinstance(time_taken, float)
-
-    def test_timeit_once_with_kwargs(self) -> None:
-        bench = Benchmarks()
-
-        def func(a: int, b: int) -> int:
-            return a + b
-
-        time_taken = bench.timeit_once(func, 1, 2)
-        assert time_taken >= 0
-
     def test_benchmark_sorts(self) -> None:
+        """
+        Тест запуска бенчмарков сортировок.
+        :return: None.
+        """
+        arrays = {"test": [3, 1, 2]}
+        algorithms = {"goose": sorted}
         bench = Benchmarks()
+        results = bench.benchmark_sorts(arrays, algorithms)
+        assert "goose" in results
+        assert "test" in results["goose"]
+        assert results["goose"]["test"] > 0
 
-        arrays: dict[str, list[int]] = {
-            "test1": [3, 1, 2],
-            "test2": [5, 4, 3, 2, 1],
-        }
+    def test_benchmark_data_structures(self) -> None:
+        """
+        Тест запуска бенчмарков очереди и стека.
+        :return: None.
+        """
+        def test_ds() -> None:
+            stack = []
+            for i in range(100):
+                stack.append(i)
+            for _ in range(100):
+                stack.pop()
 
-        algos: dict[str, Any] = {"sorted": sorted}
-
-        results = bench.benchmark_sorts(arrays, algos)
-
-        assert "sorted" in results
-        assert "test1" in results["sorted"]
-        assert "test2" in results["sorted"]
-        assert isinstance(results["sorted"]["test1"], float)
-        assert isinstance(results["sorted"]["test2"], float)
-
-    def test_benchmark_empty_arrays(self) -> None:
         bench = Benchmarks()
-        arrays: dict[str, list[Any]] = {"empty": []}
-        algos: dict[str, Any] = {"sorted": sorted}
-        results = bench.benchmark_sorts(arrays, algos)
-        assert results["sorted"]["empty"] >= 0
+        structures = {"test_structure": test_ds}
+        results = bench.benchmark_data_structures(structures)
+        assert "test_structure" in results
+        assert results["test_structure"] > 0
+
+    def test_benchmark_factorial_fibonacci(self) -> None:
+        """
+        Тест запуска бенчмарков факториала и Фибоначчи.
+        :return: None.
+        """
+        def test_factorial(n: int) -> int:
+            if n <= 1:
+                return 1
+            return n * test_factorial(n - 1)
+
+        bench = Benchmarks()
+        functions: dict[str, Callable[[int], int]] = {"goose": test_factorial}
+        n_values = [5, 10]
+        results = bench.benchmark_factorial_fibonacci(functions, n_values)
+        assert "goose" in results
+        assert 5 in results["goose"]
+        assert 10 in results["goose"]

@@ -7,7 +7,7 @@ from src.interface.config import queue_map, stack_map
 
 def run_stack() -> None:
     """
-    Запускает интерактивную сессию для работы со стеком.
+    Запускает сессию для работы со стеком.
     :return: None.
     """
     stack_type = typer.prompt(
@@ -20,84 +20,32 @@ def run_stack() -> None:
         typer.echo(f"Ошибка: Реализация {stack_type} не найдена", err=True)
         return
 
-    s = stack_cls()
+    stack = stack_cls()
     typer.echo(f"Создан стек: {stack_type}")
     typer.echo("Операции [push/pop/peek/min/len/empty/exit]")
 
-    def handle_push() -> None:
-        """
-        Обрабатывает операцию добавления элемента в стек.
-        :return: None.
-        """
-        value = typer.prompt("Значение", type=int)
-        s.push(value)
-        typer.echo(f"Добавлено: {value}")
-
-    def handle_pop() -> None:
-        """
-        Обрабатывает операцию извлечения элемента из стека.
-        :return: None.
-        """
-        try:
-            value = s.pop()
-            typer.echo(f"Извлечено: {value}")
-        except ValueError:
-            typer.echo("Стек пуст")
-
-    def handle_peek() -> None:
-        """
-        Обрабатывает операцию просмотра верхнего элемента стека.
-        :return: None.
-        """
-        try:
-            value = s.peek()
-            typer.echo(f"Верхний элемент: {value}")
-        except ValueError:
-            typer.echo("Стек пуст")
-
-    def handle_min() -> None:
-        """
-        Обрабатывает операцию получения минимального элемента стека.
-        :return: None.
-        """
-        try:
-            value = s.min()
-            typer.echo(f"Минимум: {value}")
-        except ValueError:
-            typer.echo("Стек пуст")
-
-    def handle_len() -> None:
-        """
-        Обрабатывает операцию получения размера стека.
-        :return: None.
-        """
-        typer.echo(f"Размер: {len(s)}")
-
-    def handle_empty() -> None:
-        """
-        Обрабатывает операцию проверки стека на пустоту.
-        :return: None.
-        """
-        typer.echo(f"Пуст: {s.is_empty()}")
-
-    operations_map: dict[str, Callable[[], None]] = {
-        "push": handle_push,
-        "pop": handle_pop,
-        "peek": handle_peek,
-        "min": handle_min,
-        "len": handle_len,
-        "empty": handle_empty,
+    operations: dict[str, Callable[[], None]] = {
+        "pop": lambda: typer.echo(f"Извлечено: {stack.pop()}"),
+        "peek": lambda: typer.echo(f"Верхний элемент: {stack.peek()}"),
+        "min": lambda: typer.echo(f"Минимум: {stack.min()}"),
+        "len": lambda: typer.echo(f"Размер: {len(stack)}"),
+        "empty": lambda: typer.echo(f"Пуст: {stack.is_empty()}"),
     }
 
-    while True:
+    operation = None
+    while operation != "exit":
         operation = typer.prompt("Операция")
-        if operation == "exit":
-            break
-        handler = operations_map.get(operation)
-        if handler:
-            handler()
-        else:
-            typer.echo("Неизвестная операция")
+        try:
+            if operation == "push":
+                value = typer.prompt("Значение", type=int)
+                stack.push(value)
+                typer.echo(f"Добавлено: {value}")
+            elif operation in operations:
+                operations[operation]()
+            else:
+                typer.echo("Неизвестная операция")
+        except ValueError as e:
+            typer.echo(f"Ошибка: {e}")
 
 
 def run_queue() -> None:
@@ -115,69 +63,28 @@ def run_queue() -> None:
         typer.echo(f"Ошибка: Реализация {queue_type} не найдена", err=True)
         return
 
-    q = queue_cls()
+    queue = queue_cls()
     typer.echo(f"Создана очередь: {queue_type}")
     typer.echo("Операции [enqueue/dequeue/front/len/empty/exit]")
 
-    def handle_enqueue() -> None:
-        """
-        Обрабатывает операцию добавления элемента в очередь.
-        :return: None.
-        """
-        value = typer.prompt("Значение", type=int)
-        q.enqueue(value)
-        typer.echo(f"Добавлено: {value}")
-
-    def handle_dequeue() -> None:
-        """
-        Обрабатывает операцию извлечения элемента из очереди.
-        :return: None.
-        """
-        try:
-            value = q.dequeue()
-            typer.echo(f"Извлечено: {value}")
-        except ValueError:
-            typer.echo("Очередь пуста")
-
-    def handle_front() -> None:
-        """
-        Обрабатывает операцию просмотра первого элемента очереди.
-        :return: None.
-        """
-        try:
-            value = q.front()
-            typer.echo(f"Первый элемент: {value}")
-        except ValueError:
-            typer.echo("Очередь пуста")
-
-    def handle_len() -> None:
-        """
-        Обрабатывает операцию получения размера очереди.
-        :return: None.
-        """
-        typer.echo(f"Размер: {len(q)}")
-
-    def handle_empty() -> None:
-        """
-        Обрабатывает операцию проверки очереди на пустоту.
-        :return: None.
-        """
-        typer.echo(f"Пуста: {q.is_empty()}")
-
-    operations_map: dict[str, Callable[[], None]] = {
-        "enqueue": handle_enqueue,
-        "dequeue": handle_dequeue,
-        "front": handle_front,
-        "len": handle_len,
-        "empty": handle_empty,
+    operations: dict[str, Callable[[], None]] = {
+        "dequeue": lambda: typer.echo(f"Извлечено: {queue.dequeue()}"),
+        "front": lambda: typer.echo(f"Первый элемент: {queue.front()}"),
+        "len": lambda: typer.echo(f"Размер: {len(queue)}"),
+        "empty": lambda: typer.echo(f"Пуста: {queue.is_empty()}"),
     }
 
-    while True:
+    operation = None
+    while operation != "exit":
         operation = typer.prompt("Операция")
-        if operation == "exit":
-            break
-        handler = operations_map.get(operation)
-        if handler:
-            handler()
-        else:
-            typer.echo("Неизвестная операция")
+        try:
+            if operation == "enqueue":
+                value = typer.prompt("Значение", type=int)
+                queue.enqueue(value)
+                typer.echo(f"Добавлено: {value}")
+            elif operation in operations:
+                operations[operation]()
+            else:
+                typer.echo("Неизвестная операция")
+        except ValueError as e:
+            typer.echo(f"Ошибка: {e}")

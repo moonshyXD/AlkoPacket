@@ -20,13 +20,13 @@ def show_help() -> None:
     :return: None.
     """
     typer.echo("\nСправка по командам:")
-    typer.echo("  sorts     - Интерактивный выбор и запуск сортировок")
-    typer.echo("  benchmark - Замер скорости работы сортировок")
-    typer.echo("  factorial - Вычисление факториала")
-    typer.echo("  fibonacci - Вычисление чисел Фибоначчи")
-    typer.echo("  stack     - Работа со стеком")
-    typer.echo("  queue     - Работа с очередью")
-    typer.echo("  exit      - Выход из программы")
+    typer.echo("sorts     - Запуск сортировок")
+    typer.echo("benchmark - Замер скорости работы сортировок")
+    typer.echo("factorial - Вычисление факториала")
+    typer.echo("fibonacci - Вычисление чисел Фибоначчи")
+    typer.echo("stack     - Работа со стеком")
+    typer.echo("queue     - Работа с очередью")
+    typer.echo("exit      - Выход из программы")
 
 
 @app.command()
@@ -48,7 +48,6 @@ def hello() -> None:
         "stack": run_stack,
         "queue": run_queue,
         "help": show_help,
-        "--help": show_help,
     }
 
     while True:
