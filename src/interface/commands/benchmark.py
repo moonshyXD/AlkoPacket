@@ -4,8 +4,8 @@ import typer
 
 from src.interface.config import sort_command_map
 from src.sorts.bucket_sort import BucketSort
-from src.wrappers.benchmarks import Benchmarks
-from src.wrappers.test_cases import TestCases
+from src.utils.benchmarks import Benchmarks
+from src.utils.test_cases import TestCases
 
 
 def _make_sort_wrapper(

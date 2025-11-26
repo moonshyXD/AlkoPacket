@@ -14,3 +14,7 @@ run:
 .PHONY: setup
 setup:
 	uv sync
+
+.PHONY: testcover
+testcover:
+	pytest --cov=src --cov-report=term-missing

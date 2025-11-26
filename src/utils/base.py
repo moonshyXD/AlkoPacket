@@ -20,12 +20,15 @@ class BaseSort(ABC):
         """
         if cmp:
             return cmp(a, b)
+
         a_key = key(a) if key else a
         b_key = key(b) if key else b
         if a_key < b_key:
             return -1
+
         if a_key > b_key:
             return 1
+
         return 0
 
     @staticmethod
@@ -37,10 +40,10 @@ class BaseSort(ABC):
     ) -> list[Any]:
         """
         Абстрактный метод для выполнения сортировки.
-        :param arr: Список для сортировки.
-        :param key: Функция для извлечения ключа сравнения.
-        :param cmp: Функция-компаратор.
-        :return: Отсортированный список.
+        :param arr: Массив для сортировки.
+        :param key: Ключ сравнения эелементов.
+        :param cmp: Компаратор сравнения элементов.
+        :return: Отсортированный массив.
         """
         raise NotImplementedError
 
@@ -82,8 +85,8 @@ class BaseStack(ABC):
     @abstractmethod
     def is_empty(self) -> bool:
         """
-        Абстрактный метод для проверки, пуст ли стек.
-        :return: True, если пуст, иначе False.
+        Абстрактный метод для проверки пустоты стека.
+        :return: True, если пуст, False, если не пуст.
         """
         raise NotImplementedError
 
@@ -125,8 +128,8 @@ class BaseQueue(ABC):
     @abstractmethod
     def is_empty(self) -> bool:
         """
-        Абстрактный метод для проверки, пуста ли очередь.
-        :return: True, если пуста, иначе False.
+        Абстрактный метод для проверки пустоты очереди.
+        :return: True, если пуста, False, если не пуст.
         """
         raise NotImplementedError
 

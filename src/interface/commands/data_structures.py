@@ -3,7 +3,6 @@ from typing import Callable
 import typer
 
 from src.interface.config import queue_map, stack_map
-from src.utils.errors import QueueIsEmpty, StackIsEmpty
 
 
 def run_stack() -> None:
@@ -42,7 +41,7 @@ def run_stack() -> None:
         try:
             value = s.pop()
             typer.echo(f"Извлечено: {value}")
-        except StackIsEmpty:
+        except ValueError:
             typer.echo("Стек пуст")
 
     def handle_peek() -> None:
@@ -53,7 +52,7 @@ def run_stack() -> None:
         try:
             value = s.peek()
             typer.echo(f"Верхний элемент: {value}")
-        except StackIsEmpty:
+        except ValueError:
             typer.echo("Стек пуст")
 
     def handle_min() -> None:
@@ -64,7 +63,7 @@ def run_stack() -> None:
         try:
             value = s.min()
             typer.echo(f"Минимум: {value}")
-        except StackIsEmpty:
+        except ValueError:
             typer.echo("Стек пуст")
 
     def handle_len() -> None:
@@ -137,7 +136,7 @@ def run_queue() -> None:
         try:
             value = q.dequeue()
             typer.echo(f"Извлечено: {value}")
-        except QueueIsEmpty:
+        except ValueError:
             typer.echo("Очередь пуста")
 
     def handle_front() -> None:
@@ -148,7 +147,7 @@ def run_queue() -> None:
         try:
             value = q.front()
             typer.echo(f"Первый элемент: {value}")
-        except QueueIsEmpty:
+        except ValueError:
             typer.echo("Очередь пуста")
 
     def handle_len() -> None:

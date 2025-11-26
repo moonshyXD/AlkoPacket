@@ -13,8 +13,8 @@ class BubbleSort(BaseSort):
         """
         Выполняет сортировку пузырьком.
         :param arr: Массив для сортировки.
-        :param key: Функция извлечения ключа сравнения из элемента.
-        :param cmp: Функция-компаратор для сравнения двух элементов.
+        :param key: Ключ сравнения эелементов.
+        :param cmp: Компаратор сравнения элементов.
         :return: Отсортированный массив.
         """
         n = len(arr)
@@ -22,4 +22,5 @@ class BubbleSort(BaseSort):
             for j in range(n - i - 1):
                 if BaseSort.compare(arr[j], arr[j + 1], key, cmp) > 0:
                     arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
         return arr

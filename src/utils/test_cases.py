@@ -8,7 +8,7 @@ class TestCases:
     def _set_seed(seed: int | None = None) -> None:
         """
         Устанавливает seed для генератора случайных чисел.
-        :param seed: Значение seed или None, если менять seed не нужно.
+        :param seed: Значение seed или None.
         :return: None.
         """
         if seed is not None:
@@ -25,9 +25,9 @@ class TestCases:
         """
         Генерирует массив случайных целых чисел.
         :param n: Размер массива.
-        :param lo: Нижняя граница значений (включительно).
-        :param hi: Верхняя граница значений (включительно).
-        :param distinct: Требовать ли уникальность элементов.
+        :param lo: Нижняя граница значений.
+        :param hi: Верхняя граница значений.
+        :param distinct: Уникальность всех элементов.
         :param seed: Значение seed для детерминированной генерации.
         :return: Список случайных целых чисел.
         """
@@ -37,8 +37,10 @@ class TestCases:
                 f"Невозможно сгенерировать {n}",
                 f"неповторяющихся элементов в промежутке [{lo}, {hi}]",
             )
+
         if distinct:
             return random.sample(range(lo, hi + 1), n)
+
         return [random.randint(lo, hi) for _ in range(n)]
 
     @staticmethod
@@ -73,6 +75,7 @@ class TestCases:
             i = random.randint(0, n - 1)
             j = random.randint(0, n - 1)
             array[i], array[j] = array[j], array[i]
+
         return array
 
     @staticmethod

@@ -14,7 +14,6 @@ class Fibonachi:
         f0 = 0
         f1 = 1
         result = 0
-
         for _ in range(n - 1):
             result = f0 + f1
             f0, f1 = f1, result

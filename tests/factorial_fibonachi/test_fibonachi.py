@@ -1,0 +1,19 @@
+from typing import Any
+
+import pytest
+
+from src.factorial_fibonachi.fibonachi import Fibonachi
+
+
+@pytest.mark.parametrize(
+    "func,n,expected",
+    [
+        (Fibonachi.fibo, 0, 0),
+        (Fibonachi.fibo, 5, 5),
+        (Fibonachi.fibo, 10, 55),
+        (Fibonachi.fibo_recursive, 0, 0),
+        (Fibonachi.fibo_recursive, 5, 5),
+    ],
+)
+def test_fibonacci(func: Any, n: int, expected: int) -> None:
+    assert func(n) == expected

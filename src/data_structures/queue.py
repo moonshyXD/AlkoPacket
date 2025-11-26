@@ -1,6 +1,5 @@
 from src.data_structures.stack import StackOnList
 from src.utils.base import BaseQueue, Node
-from src.utils.errors import QueueIsEmpty
 
 
 class QueueOnLinkedList(BaseQueue):
@@ -22,9 +21,11 @@ class QueueOnLinkedList(BaseQueue):
         new_node = Node(x, x)
         if self.tail:
             self.tail.next = new_node
+
         self.tail = new_node
         if not self.head:
             self.head = new_node
+
         self.size += 1
 
     def dequeue(self) -> int:
@@ -33,11 +34,13 @@ class QueueOnLinkedList(BaseQueue):
         :return: Первый элемент очереди.
         """
         if self.head is None:
-            raise QueueIsEmpty("Очередь пуста")
+            raise ValueError("Очередь пуста")
+
         result = self.head.value
         self.head = self.head.next
         if self.head is None:
             self.tail = None
+
         self.size -= 1
         return result
 
@@ -47,7 +50,8 @@ class QueueOnLinkedList(BaseQueue):
         :return: Первый элемент очереди.
         """
         if self.head is None:
-            raise QueueIsEmpty("Очередь пуста")
+            raise ValueError("Очередь пуста")
+
         return self.head.value
 
     def is_empty(self) -> bool:
@@ -87,7 +91,8 @@ class QueueOnList(BaseQueue):
         :return: Первый элемент очереди.
         """
         if not self.queue:
-            raise QueueIsEmpty("Очередь пуста")
+            raise ValueError("Очередь пуста")
+
         return self.queue.pop(0)
 
     def front(self) -> int:
@@ -96,7 +101,8 @@ class QueueOnList(BaseQueue):
         :return: Первый элемент очереди.
         """
         if not self.queue:
-            raise QueueIsEmpty("Очередь пуста")
+            raise ValueError("Очередь пуста")
+
         return self.queue[0]
 
     def is_empty(self) -> bool:
@@ -138,9 +144,11 @@ class QueueOnStack(BaseQueue):
         """
         if self.stack_out.is_empty():
             if self.stack_in.is_empty():
-                raise QueueIsEmpty("Очередь пуста")
+                raise ValueError("Очередь пуста")
+
             while not self.stack_in.is_empty():
                 self.stack_out.push(self.stack_in.pop())
+
         return self.stack_out.pop()
 
     def front(self) -> int:
@@ -150,9 +158,11 @@ class QueueOnStack(BaseQueue):
         """
         if self.stack_out.is_empty():
             if self.stack_in.is_empty():
-                raise QueueIsEmpty("Очередь пуста")
+                raise ValueError("Очередь пуста")
+
             while not self.stack_in.is_empty():
                 self.stack_out.push(self.stack_in.pop())
+
         return self.stack_out.peek()
 
     def is_empty(self) -> bool:

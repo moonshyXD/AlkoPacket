@@ -3,7 +3,7 @@ from typing import Any, Callable
 import typer
 
 from src.interface.config import cmp_map, key_map, sort_command_map
-from src.wrappers.test_cases import TestCases
+from src.utils.test_cases import TestCases
 
 
 def _get_array() -> list[Any] | None:
@@ -11,7 +11,7 @@ def _get_array() -> list[Any] | None:
     Интерактивно получает массив от пользователя.
     :return: Массив данных или None при ошибке ввода.
     """
-    typer.echo("Как получить массив для сортировки?")
+    typer.echo("Как получить массив для сортировки (введите цифру)?")
     typer.echo("1. Ввести вручную")
     typer.echo("2. Сгенерировать из тест-кейса")
     input_choice = typer.prompt("Ваш выбор", type=int)
@@ -23,8 +23,9 @@ def _get_array() -> list[Any] | None:
         except ValueError:
             typer.echo("Ошибка: Элементы должны быть числами", err=True)
             return None
+
     elif input_choice == 2:
-        typer.echo("Выберите тип генерации массива (введите цифру   ):")
+        typer.echo("Выберите тип генерации массива (введите цифру):")
         typer.echo("1. Случайный массив целых чисел")
         typer.echo("2. Случайный массив вещественных чисел")
         typer.echo("3. Почти отсортированный")
@@ -32,6 +33,17 @@ def _get_array() -> list[Any] | None:
         typer.echo("5. Много дубликатов")
         gen_choice = typer.prompt("Номер", type=int)
         n = typer.prompt("Размер массива (n)", type=int)
+
+        use_seed_input = typer.prompt(
+            "Использовать seed для воспроизводимости? [y/n]",
+            default="n",
+            show_default=False,
+        )
+        seed = None
+        if use_seed_input.lower() in ["y", "yes"]:
+            seed = typer.prompt(
+                "Введите seed", type=int, default=42, show_default=False
+            )
 
         if gen_choice == 1:
             lo = typer.prompt(
@@ -46,9 +58,37 @@ def _get_array() -> list[Any] | None:
                 default=100,
                 show_default=False,
             )
-            return TestCases.rand_int_array(n, lo, hi)
+
+            distinct_input = typer.prompt(
+                "Генерировать только уникальные элементы? [y/n]",
+                default="n",
+                show_default=False,
+            )
+            distinct = distinct_input.lower() in ["y", "yes"]
+
+            try:
+                return TestCases.rand_int_array(
+                    n, lo, hi, distinct=distinct, seed=seed
+                )
+            except Exception as e:
+                typer.echo(f"Ошибка генерации: {e}", err=True)
+                return None
+
         elif gen_choice == 2:
-            return TestCases.rand_float_array(n)
+            lo = typer.prompt(
+                "Минимальное значение (lo)",
+                type=float,
+                default=0.0,
+                show_default=False,
+            )
+            hi = typer.prompt(
+                "Максимальное значение (hi)",
+                type=float,
+                default=1.0,
+                show_default=False,
+            )
+            return TestCases.rand_float_array(n, lo, hi, seed=seed)
+
         elif gen_choice == 3:
             swaps = typer.prompt(
                 "Количество перестановок",
@@ -56,11 +96,19 @@ def _get_array() -> list[Any] | None:
                 default=n // 10,
                 show_default=False,
             )
-            return TestCases.nearly_sorted(n, swaps)
+            return TestCases.nearly_sorted(n, swaps, seed=seed)
+
         elif gen_choice == 4:
             return TestCases.reverse_sorted(n)
+
         elif gen_choice == 5:
-            return TestCases.many_duplicates(n)
+            k_unique = typer.prompt(
+                "Количество уникальных значений",
+                type=int,
+                default=5,
+                show_default=False,
+            )
+            return TestCases.many_duplicates(n, k_unique, seed=seed)
 
     typer.echo("Неверный выбор", err=True)
     return None
@@ -72,7 +120,7 @@ def run_sorts() -> None:
     :return: None.
     """
     sort_type = typer.prompt(
-        "Введите название сортировки"
+        "Введите название сортировки "
         "[Bubble-sort/Bucket-sort/Counting-sort/"
         "Heap-sort/Quick-sort/Radix-sort]"
     )
@@ -113,6 +161,7 @@ def run_sorts() -> None:
                 f"Ключ '{key_type}' не найден, используется default",
                 err=True,
             )
+
         if cmp is None and cmp_type not in ["", "default"]:
             typer.echo(
                 f"Компаратор '{cmp_type}' не найден, используется default",

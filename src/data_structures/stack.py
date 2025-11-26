@@ -1,7 +1,6 @@
 from collections import deque
 
 from src.utils.base import BaseStack, Node
-from src.utils.errors import StackIsEmpty
 
 
 class StackOnLinkedList(BaseStack):
@@ -23,6 +22,7 @@ class StackOnLinkedList(BaseStack):
             min_value = value
         else:
             min_value = min(value, self.head.cur_min)
+
         self.head = Node(value, min_value, self.head)
         self.size += 1
 
@@ -30,9 +30,11 @@ class StackOnLinkedList(BaseStack):
         """
         Извлекает и удаляет элемент с вершины стека.
         :return: Верхний элемент стека.
+        :raises ValueError: Если стек пуст.
         """
         if self.head is None:
-            raise StackIsEmpty("Стэк пуст")
+            raise ValueError("Стэк пуст")
+
         result = self.head.value
         self.head = self.head.next
         self.size -= 1
@@ -49,9 +51,11 @@ class StackOnLinkedList(BaseStack):
         """
         Возвращает верхний элемент стека без удаления.
         :return: Верхний элемент стека.
+        :raises ValueError: Если стек пуст.
         """
         if self.head is None:
-            raise StackIsEmpty("Стэк пуст")
+            raise ValueError("Стэк пуст")
+
         return self.head.value
 
     def __len__(self) -> int:
@@ -65,9 +69,11 @@ class StackOnLinkedList(BaseStack):
         """
         Возвращает минимальный элемент в стеке.
         :return: Минимальный элемент в стеке.
+        :raises ValueError: Если стек пуст.
         """
         if self.head is None:
-            raise StackIsEmpty("Стэк пуст")
+            raise ValueError("Стэк пуст")
+
         return self.head.cur_min
 
 
@@ -88,17 +94,21 @@ class StackOnList(BaseStack):
         """
         if not self.min_values or value <= self.min_values[-1]:
             self.min_values.append(value)
+
         self.stack.append(value)
 
     def pop(self) -> int:
         """
         Извлекает и удаляет элемент с вершины стека.
         :return: Верхний элемент стека.
+        :raises ValueError: Если стек пуст.
         """
         if not self.stack:
-            raise StackIsEmpty("Стэк пуст")
+            raise ValueError("Стэк пуст")
+
         if self.stack[-1] == self.min_values[-1]:
             self.min_values.pop()
+
         return self.stack.pop()
 
     def is_empty(self) -> bool:
@@ -112,9 +122,11 @@ class StackOnList(BaseStack):
         """
         Возвращает верхний элемент стека без удаления.
         :return: Верхний элемент стека.
+        :raises ValueError: Если стек пуст.
         """
         if not self.stack:
-            raise StackIsEmpty("Стэк пуст")
+            raise ValueError("Стэк пуст")
+
         return self.stack[-1]
 
     def __len__(self) -> int:
@@ -128,9 +140,11 @@ class StackOnList(BaseStack):
         """
         Возвращает минимальный элемент в стеке.
         :return: Минимальный элемент в стеке.
+        :raises ValueError: Если стек пуст.
         """
         if not self.min_values:
-            raise StackIsEmpty("Стэк пуст")
+            raise ValueError("Стэк пуст")
+
         return self.min_values[-1]
 
 
@@ -158,15 +172,19 @@ class StackOnQueue(BaseStack):
         """
         Извлекает и удаляет элемент с вершины стека.
         :return: Верхний элемент стека.
+        :raises ValueError: Если стек пуст.
         """
         if not self.queue1:
-            raise StackIsEmpty("Стэк пуст")
+            raise ValueError("Стэк пуст")
+
         while len(self.queue1) > 1:
             self.queue2.append(self.queue1.popleft())
+
         result = self.queue1.popleft()
         self.queue1, self.queue2 = self.queue2, self.queue1
         if self.min_values and result == self.min_values[-1]:
             self.min_values.pop()
+
         return result
 
     def is_empty(self) -> bool:
@@ -180,11 +198,14 @@ class StackOnQueue(BaseStack):
         """
         Возвращает верхний элемент стека без удаления.
         :return: Верхний элемент стека.
+        :raises ValueError: Если стек пуст.
         """
         if not self.queue1:
-            raise StackIsEmpty("Стэк пуст")
+            raise ValueError("Стэк пуст")
+
         while len(self.queue1) > 1:
             self.queue2.append(self.queue1.popleft())
+
         result = self.queue1.popleft()
         self.queue2.append(result)
         self.queue1, self.queue2 = self.queue2, self.queue1
@@ -201,7 +222,9 @@ class StackOnQueue(BaseStack):
         """
         Возвращает минимальный элемент в стеке.
         :return: Минимальный элемент в стеке.
+        :raises ValueError: Если стек пуст.
         """
         if not self.min_values:
-            raise StackIsEmpty("Стэк пуст")
+            raise ValueError("Стэк пуст")
+
         return self.min_values[-1]

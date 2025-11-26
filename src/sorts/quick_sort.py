@@ -13,12 +13,13 @@ class QuickSort(BaseSort):
         """
         Выполняет быструю сортировку.
         :param arr: Массив для сортировки.
-        :param key: Функция извлечения ключа сравнения из элемента.
-        :param cmp: Функция-компаратор для сравнения двух элементов.
+        :param key: Ключ сравнения эелементов.
+        :param cmp: Компаратор сравнения элементов.
         :return: Отсортированный массив.
         """
         if len(arr) <= 1:
             return arr
+
         less_than = []
         higher_than = []
         equal = []
@@ -31,6 +32,7 @@ class QuickSort(BaseSort):
                 less_than.append(number)
             else:
                 equal.append(number)
+
         return (
             QuickSort.execute(less_than, key, cmp)
             + equal

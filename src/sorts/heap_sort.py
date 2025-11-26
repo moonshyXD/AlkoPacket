@@ -13,17 +13,19 @@ class HeapSort(BaseSort):
         """
         Выполняет пирамидальную сортировку.
         :param arr: Массив для сортировки.
-        :param key: Функция извлечения ключа сравнения из элемента.
-        :param cmp: Функция-компаратор для сравнения двух элементов.
+        :param key: Ключ сравнения эелементов.
+        :param cmp: Компаратор сравнения элементов.
         :return: Отсортированный массив.
         """
         arr = arr.copy()
         n = len(arr)
         for i in range(n // 2 - 1, -1, -1):
             HeapSort._heapify(arr, n, i, key, cmp)
+
         for i in range(n - 1, 0, -1):
             arr[0], arr[i] = arr[i], arr[0]
             HeapSort._heapify(arr, i, 0, key, cmp)
+
         return arr
 
     @staticmethod
@@ -51,11 +53,13 @@ class HeapSort(BaseSort):
             and HeapSort.compare(arr[left], arr[largest], key, cmp) > 0
         ):
             largest = left
+
         if (
             right < heap_size
             and HeapSort.compare(arr[right], arr[largest], key, cmp) > 0
         ):
             largest = right
+
         if largest != root_index:
             arr[largest], arr[root_index] = arr[root_index], arr[largest]
             HeapSort._heapify(arr, heap_size, largest, key, cmp)

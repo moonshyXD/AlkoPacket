@@ -13,12 +13,13 @@ class RadixSort(BaseSort):
         """
         Выполняет поразрядную сортировку.
         :param arr: Массив целых чисел или объектов с целочисленным ключом.
-        :param key: Функция, возвращающая целочисленный ключ для сортировки.
-        :param cmp: Не используется в данной реализации.
+        :param key: Ключ сравнения эелементов.
+        :param cmp: Компаратор сравнения элементов.
         :return: Отсортированный массив.
         """
         if not arr:
             return []
+
         keys = [key(item) if key else item for item in arr]
         max_num = max(keys)
         step = 1
@@ -30,13 +31,17 @@ class RadixSort(BaseSort):
             for _, k in pairs:
                 index = (k // step) % 10
                 count[index] += 1
+
             for i in range(1, 10):
                 count[i] += count[i - 1]
+
             for i in range(n - 1, -1, -1):
                 item, k = pairs[i]
                 index = (k // step) % 10
                 res[count[index] - 1] = (item, k)
                 count[index] -= 1
+
             pairs = res
             step *= 10
+
         return [item for item, _ in pairs]
