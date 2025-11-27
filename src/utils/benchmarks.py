@@ -8,11 +8,11 @@ class Benchmarks:
         self, func: Callable[..., Any], *args: Any, **kwargs: Any
     ) -> float:
         """
-        Измеряет время выполнения функции один раз.
-        :param func: Функция для измерения.
-        :param args: Позиционные аргументы для функции.
-        :param kwargs: Именованные аргументы для функции.
-        :return: Время выполнения в секундах.
+        Замеряет время работы функции один раз
+        :param func: функция для замера
+        :param args: позиционные аргументы
+        :param kwargs: именованные аргументы
+        :return: время в секундах
         """
         start = time.perf_counter()
         func(*args, **kwargs)
@@ -25,10 +25,10 @@ class Benchmarks:
         algos: dict[str, Callable[..., Any]],
     ) -> dict[str, dict[str, float]]:
         """
-        Бенчмарк алгоритмов сортировки на нескольких наборах данных.
-        :param arrays: Словарь, название набора данных - массив.
-        :param algos: Словарь, название алгоритма - функция сортировки.
-        :return: Словарь с результатами, название алгоритма - время выполнения.
+        Бенчмаркит сортировки на разных массивах
+        :param arrays: словарь название_массива -> массив
+        :param algos: словарь название_алгоритма -> функция
+        :return: результаты алгоритм -> массив -> время
         """
         results: dict[str, dict[str, float]] = {}
         for algo_name, algo_func in algos.items():

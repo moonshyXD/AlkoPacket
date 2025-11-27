@@ -11,11 +11,11 @@ class QuickSort(BaseSort):
         cmp: Callable[[Any, Any], int] | None = None,
     ) -> list[Any]:
         """
-        Выполняет быструю сортировку.
-        :param arr: Массив для сортировки.
-        :param key: Ключ сравнения эелементов.
-        :param cmp: Компаратор сравнения элементов.
-        :return: Отсортированный массив.
+        Делает быструю сортировку
+        :param arr: массив для сортировки
+        :param key: ключ сравнения
+        :param cmp: компаратор
+        :return: отсортированный массив
         """
         if len(arr) <= 1:
             return arr

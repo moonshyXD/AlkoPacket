@@ -11,12 +11,12 @@ class BaseSort(ABC):
         cmp: Callable[[Any, Any], int] | None = None,
     ) -> int:
         """
-        Сравнивает два элемента с использованием ключа/компаратора.
-        :param a: Первый элемент для сравнения.
-        :param b: Второй элемент для сравнения.
-        :param key: Функция для извлечения ключа сравнения.
-        :param cmp: Внешняя функция-компаратор.
-        :return: -1 если a < b, 0 если a == b, 1 если a > b.
+        Сравнивает два элемента
+        :param a: первый элемент
+        :param b: второй элемент
+        :param key: функция для ключа сравнения
+        :param cmp: компаратор
+        :return: -1 если a < b, 0 если равны, 1 если a > b
         """
         if cmp:
             return cmp(a, b)
@@ -39,11 +39,11 @@ class BaseSort(ABC):
         cmp: Callable[[Any, Any], int] | None = None,
     ) -> list[Any]:
         """
-        Абстрактный метод для выполнения сортировки.
-        :param arr: Массив для сортировки.
-        :param key: Ключ сравнения эелементов.
-        :param cmp: Компаратор сравнения элементов.
-        :return: Отсортированный массив.
+        Выполняет сортировку массива
+        :param arr: массив для сортировки
+        :param key: ключ сравнения элементов
+        :param cmp: компаратор сравнения
+        :return: отсортированный массив
         """
         raise NotImplementedError
 
@@ -52,49 +52,48 @@ class BaseStack(ABC):
     @abstractmethod
     def push(self, item: Any) -> None:
         """
-        Абстрактный метод добавления элемента в стек.
-        :param item: Элемент для добавления.
-        :return: None.
+        Добавляет элемент в стек
+        :param item: элемент для добавления
         """
         raise NotImplementedError
 
     @abstractmethod
     def pop(self) -> Any:
         """
-        Абстрактный метод извлечения элемента из стека.
-        :return: Верхний элемент стека.
+        Извлекает верхний элемент стека
+        :return: верхний элемент
         """
         raise NotImplementedError
 
     @abstractmethod
     def peek(self) -> Any:
         """
-        Абстрактный метод просмотра верхнего элемента стека.
-        :return: Верхний элемент стека.
+        Смотрит верхний элемент без удаления
+        :return: верхний элемент
         """
         raise NotImplementedError
 
     @abstractmethod
     def min(self) -> Any:
         """
-        Абстрактный метод для поиска минимального элемента.
-        :return: Минимальный элемент в стеке.
+        Находит минимальный элемент в стеке
+        :return: минимальный элемент
         """
         raise NotImplementedError
 
     @abstractmethod
     def is_empty(self) -> bool:
         """
-        Абстрактный метод для проверки пустоты стека.
-        :return: True, если пуст, False, если не пуст.
+        Проверяет пустоту стека
+        :return: True если пуст, False иначе
         """
         raise NotImplementedError
 
     @abstractmethod
     def __len__(self) -> int:
         """
-        Абстрактный метод для получения размера стека.
-        :return: Количество элементов в стеке.
+        Возвращает размер стека
+        :return: количество элементов
         """
         raise NotImplementedError
 
@@ -103,41 +102,40 @@ class BaseQueue(ABC):
     @abstractmethod
     def enqueue(self, item: Any) -> None:
         """
-        Абстрактный метод добавления элемента в очередь.
-        :param item: Элемент для добавления.
-        :return: None.
+        Добавляет элемент в очередь
+        :param item: элемент для добавления
         """
         raise NotImplementedError
 
     @abstractmethod
     def dequeue(self) -> Any:
         """
-        Абстрактный метод извлечения элемента из очереди.
-        :return: Первый элемент очереди.
+        Извлекает первый элемент очереди
+        :return: первый элемент
         """
         raise NotImplementedError
 
     @abstractmethod
     def front(self) -> Any:
         """
-        Абстрактный метод просмотра первого элемента очереди.
-        :return: Первый элемент очереди.
+        Смотрит первый элемент без удаления
+        :return: первый элемент
         """
         raise NotImplementedError
 
     @abstractmethod
     def is_empty(self) -> bool:
         """
-        Абстрактный метод для проверки пустоты очереди.
-        :return: True, если пуста, False, если не пуст.
+        Проверяет пустоту очереди
+        :return: True если пуста, False иначе
         """
         raise NotImplementedError
 
     @abstractmethod
     def __len__(self) -> int:
         """
-        Абстрактный метод для получения размера очереди.
-        :return: Количество элементов в очереди.
+        Возвращает размер очереди
+        :return: количество элементов
         """
         raise NotImplementedError
 
@@ -147,11 +145,10 @@ class Node:
         self, value: int, cur_min: int, next: "Node | None" = None
     ) -> None:
         """
-        Инициализирует узел связного списка.
-        :param value: Значение узла.
-        :param cur_min: Текущее минимальное значение.
-        :param next: Ссылка на следующий узел.
-        :return: None.
+        Создаёт узел связного списка
+        :param value: значение узла
+        :param cur_min: текущее минимальное значение
+        :param next: следующий узел
         """
         self.value = value
         self.cur_min = cur_min

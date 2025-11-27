@@ -1,12 +1,10 @@
-
 from src.utils.benchmarks import Benchmarks
 
 
 class TestBenchmarks:
     def test_benchmark_sorts(self) -> None:
         """
-        Тест запуска бенчмарков сортировок.
-        :return: None.
+        Тест запуска бенчмарков сортировок
         """
         arrays = {"test": [3, 1, 2]}
         algorithms = {"goose": sorted}

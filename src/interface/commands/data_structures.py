@@ -10,8 +10,7 @@ Logger.setup_logging()
 
 def run_stack() -> None:
     """
-    Запускает интерактивную сессию для работы со стеком.
-    :return: None.
+    Запускает интерактивную сессию для работы со стеком
     """
     stack_type = typer.prompt(
         "Реализация [linked-list/list/queue]",
@@ -59,8 +58,7 @@ def run_stack() -> None:
 
 def run_queue() -> None:
     """
-    Запускает интерактивную сессию для работы с очередью.
-    :return: None.
+    Запускает интерактивную сессию для работы с очередью
     """
     queue_type = typer.prompt(
         "Реализация [linked-list/list/stack]",
@@ -87,11 +85,11 @@ def run_queue() -> None:
     }
 
     while (operation := typer.prompt("Операция")) != "exit":
-        if operation == "exit":
-            Logger.success_execution(f"Queue-{queue_type}")
-            break
-
         try:
+            if operation == "exit":
+                Logger.success_execution(f"Queue-{queue_type}")
+                break
+
             if operation == "enqueue":
                 value = typer.prompt("Значение", type=int)
                 q.enqueue(value)

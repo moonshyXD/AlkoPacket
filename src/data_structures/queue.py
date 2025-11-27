@@ -5,8 +5,7 @@ from src.utils.base import BaseQueue, Node
 class QueueOnLinkedList(BaseQueue):
     def __init__(self) -> None:
         """
-        Инициализирует очередь на основе связного списка.
-        :return: None.
+        Инициализирует очередь на основе связного списка
         """
         self.head: Node | None = None
         self.tail: Node | None = None
@@ -14,9 +13,8 @@ class QueueOnLinkedList(BaseQueue):
 
     def enqueue(self, x: int) -> None:
         """
-        Добавляет элемент в конец очереди.
-        :param x: Элемент для добавления.
-        :return: None.
+        Добавляет элемент в конец очереди
+        :param x: Элемент для добавления
         """
         new_node = Node(x, x)
         if self.tail:
@@ -30,8 +28,8 @@ class QueueOnLinkedList(BaseQueue):
 
     def dequeue(self) -> int:
         """
-        Извлекает и удаляет первый элемент из очереди.
-        :return: Первый элемент очереди.
+        Извлекает и удаляет первый элемент из очереди
+        :return: Первый элемент очереди
         """
         if self.head is None:
             raise ValueError("Очередь пуста")
@@ -46,8 +44,8 @@ class QueueOnLinkedList(BaseQueue):
 
     def front(self) -> int:
         """
-        Возвращает первый элемент очереди без удаления.
-        :return: Первый элемент очереди.
+        Возвращает первый элемент очереди без удаления
+        :return: Первый элемент очереди
         """
         if self.head is None:
             raise ValueError("Очередь пуста")
@@ -56,15 +54,15 @@ class QueueOnLinkedList(BaseQueue):
 
     def is_empty(self) -> bool:
         """
-        Проверяет, пуста ли очередь.
-        :return: True, если очередь пуста, иначе False.
+        Проверяет, пуста ли очередь
+        :return: True, если очередь пуста, иначе False
         """
         return self.head is None
 
     def __len__(self) -> int:
         """
-        Возвращает размер очереди.
-        :return: Количество элементов в очереди.
+        Возвращает размер очереди
+        :return: Количество элементов в очереди
         """
         return self.size
 
@@ -72,23 +70,21 @@ class QueueOnLinkedList(BaseQueue):
 class QueueOnList(BaseQueue):
     def __init__(self) -> None:
         """
-        Инициализирует очередь на основе списка.
-        :return: None.
+        Инициализирует очередь на основе списка
         """
         self.queue: list[int] = []
 
     def enqueue(self, x: int) -> None:
         """
-        Добавляет элемент в конец очереди.
-        :param x: Элемент для добавления.
-        :return: None.
+        Добавляет элемент в конец очереди
+        :param x: Элемент для добавления
         """
         self.queue.append(x)
 
     def dequeue(self) -> int:
         """
-        Извлекает и удаляет первый элемент из очереди.
-        :return: Первый элемент очереди.
+        Извлекает и удаляет первый элемент из очереди
+        :return: Первый элемент очереди
         """
         if not self.queue:
             raise ValueError("Очередь пуста")
@@ -97,8 +93,8 @@ class QueueOnList(BaseQueue):
 
     def front(self) -> int:
         """
-        Возвращает первый элемент очереди без удаления.
-        :return: Первый элемент очереди.
+        Возвращает первый элемент очереди без удаления
+        :return: Первый элемент очереди
         """
         if not self.queue:
             raise ValueError("Очередь пуста")
@@ -107,15 +103,15 @@ class QueueOnList(BaseQueue):
 
     def is_empty(self) -> bool:
         """
-        Проверяет, пуста ли очередь.
-        :return: True, если очередь пуста, иначе False.
+        Проверяет, пуста ли очередь
+        :return: True, если очередь пуста, иначе False
         """
         return len(self.queue) == 0
 
     def __len__(self) -> int:
         """
-        Возвращает размер очереди.
-        :return: Количество элементов в очереди.
+        Возвращает размер очереди
+        :return: Количество элементов в очереди
         """
         return len(self.queue)
 
@@ -123,24 +119,22 @@ class QueueOnList(BaseQueue):
 class QueueOnStack(BaseQueue):
     def __init__(self) -> None:
         """
-        Инициализирует очередь на основе двух стеков.
-        :return: None.
+        Инициализирует очередь на основе двух стеков
         """
         self.stack_in: StackOnList = StackOnList()
         self.stack_out: StackOnList = StackOnList()
 
     def enqueue(self, x: int) -> None:
         """
-        Добавляет элемент в конец очереди.
-        :param x: Элемент для добавления.
-        :return: None.
+        Добавляет элемент в конец очереди
+        :param x: Элемент для добавления
         """
         self.stack_in.push(x)
 
     def dequeue(self) -> int:
         """
-        Извлекает и удаляет первый элемент из очереди.
-        :return: Первый элемент очереди.
+        Извлекает и удаляет первый элемент из очереди
+        :return: Первый элемент очереди
         """
         if self.stack_out.is_empty():
             if self.stack_in.is_empty():
@@ -153,8 +147,8 @@ class QueueOnStack(BaseQueue):
 
     def front(self) -> int:
         """
-        Возвращает первый элемент очереди без удаления.
-        :return: Первый элемент очереди.
+        Возвращает первый элемент очереди без удаления
+        :return: Первый элемент очереди
         """
         if self.stack_out.is_empty():
             if self.stack_in.is_empty():
@@ -167,14 +161,14 @@ class QueueOnStack(BaseQueue):
 
     def is_empty(self) -> bool:
         """
-        Проверяет, пуста ли очередь.
-        :return: True, если очередь пуста, иначе False.
+        Проверяет, пуста ли очередь
+        :return: True, если очередь пуста, иначе False
         """
         return self.stack_in.is_empty() and self.stack_out.is_empty()
 
     def __len__(self) -> int:
         """
-        Возвращает размер очереди.
-        :return: Количество элементов в очереди.
+        Возвращает размер очереди
+        :return: Количество элементов в очереди
         """
         return len(self.stack_in) + len(self.stack_out)

@@ -2,9 +2,9 @@ class Factorial:
     @staticmethod
     def factorial(n: int) -> int:
         """
-        Вычисляет факториал числа итеративно.
-        :param n: Целое неотрицательное число.
-        :return: Факториал числа n.
+        Вычисляет факториал числа итеративно
+        :param n: неотрицательное целое число
+        :return: факториал n
         """
         if n == 0:
             return 1
@@ -18,9 +18,9 @@ class Factorial:
     @staticmethod
     def factorial_recursive(n: int) -> int:
         """
-        Вычисляет факториал числа рекурсивно.
-        :param n: Целое неотрицательное число.
-        :return: Факториал числа n.
+        Вычисляет факториал рекурсивно
+        :param n: неотрицательное целое число
+        :return: факториал n
         """
         if n in [0, 1]:
             return 1

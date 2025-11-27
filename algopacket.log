@@ -2,3 +2,11 @@
 [2025-11-27 16:07:54] INFO: SUCCESS: Factorial-iterative(10) = 3628800
 [2025-11-27 16:10:27] INFO: STARTED: Benchmark (n=1000)
 [2025-11-27 16:10:27] INFO: SUCCESS: Benchmark (n=1000)
+[2025-11-27 22:28:28] INFO: STARTED: Benchmark (n=10)
+[2025-11-27 22:28:28] INFO: SUCCESS: Benchmark (n=10)
+[2025-11-27 22:28:40] INFO: STARTED: Queue-list
+[2025-11-27 22:28:49] ERROR: ValueError: Очередь пуста
+[2025-11-27 22:29:03] INFO: STARTED: Fibonacci-iterative(10)
+[2025-11-27 22:29:03] INFO: SUCCESS: Fibonacci-iterative(10) = 55
+[2025-11-27 22:29:20] INFO: STARTED: Factorial-iterative(10)
+[2025-11-27 22:29:20] INFO: SUCCESS: Factorial-iterative(10) = 3628800

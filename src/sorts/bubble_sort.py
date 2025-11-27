@@ -11,11 +11,11 @@ class BubbleSort(BaseSort):
         cmp: Callable[[Any, Any], int] | None = None,
     ) -> list[Any]:
         """
-        Выполняет сортировку пузырьком.
-        :param arr: Массив для сортировки.
-        :param key: Ключ сравнения эелементов.
-        :param cmp: Компаратор сравнения элементов.
-        :return: Отсортированный массив.
+        Сортирует пузырьком
+        :param arr: массив для сортировки
+        :param key: ключ сравнения элементов
+        :param cmp: компаратор сравнения элементов
+        :return: отсортированный массив
         """
         n = len(arr)
         for i in range(n):

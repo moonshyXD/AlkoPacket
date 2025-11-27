@@ -8,8 +8,7 @@ Logger.setup_logging()
 
 def run_factorial() -> None:
     """
-    Вычисляет факториал числа.
-    :return: None.
+    Вычисляет факториал числа
     """
     n = typer.prompt("Введите n", type=int)
     method = typer.prompt(
@@ -33,8 +32,7 @@ def run_factorial() -> None:
 
 def run_fibonacci() -> None:
     """
-    Вычисляет число Фибоначчи.
-    :return: None.
+    Вычисляет число Фибоначчи
     """
     n = typer.prompt("Введите n", type=int)
     method = typer.prompt(

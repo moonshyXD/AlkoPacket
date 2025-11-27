@@ -15,9 +15,8 @@ from src.data_structures.stack import (
 class TestStack:
     def test_push_pop(self, stack_class: Any) -> None:
         """
-        Тест добавления и извлечения элементов.
-        :param stack_class: Класс стека для тестирования.
-        :return: None.
+        Тест добавления и извлечения элементов
+        :param stack_class: класс стека для тестирования
         """
         s = stack_class()
         s.push(1)
@@ -27,9 +26,8 @@ class TestStack:
 
     def test_peek(self, stack_class: Any) -> None:
         """
-        Тест просмотра верхнего элемента.
-        :param stack_class: Класс стека для тестирования.
-        :return: None.
+        Тест просмотра верхнего элемента
+        :param stack_class: класс стека для тестирования
         """
         s = stack_class()
         s.push(1)
@@ -38,9 +36,8 @@ class TestStack:
 
     def test_is_empty(self, stack_class: Any) -> None:
         """
-        Тест проверки на пустоту.
-        :param stack_class: Класс стека для тестирования.
-        :return: None.
+        Тест проверки на пустоту
+        :param stack_class: класс стека для тестирования
         """
         s = stack_class()
         assert s.is_empty()
@@ -49,9 +46,8 @@ class TestStack:
 
     def test_min(self, stack_class: Any) -> None:
         """
-        Тест получения минимального элемента.
-        :param stack_class: Класс стека для тестирования.
-        :return: None.
+        Тест получения минимального элемента
+        :param stack_class: класс стека для тестирования
         """
         s = stack_class()
         s.push(3)
@@ -61,9 +57,8 @@ class TestStack:
 
     def test_len(self, stack_class: Any) -> None:
         """
-        Тест получения размера стека.
-        :param stack_class: Класс стека для тестирования.
-        :return: None.
+        Тест получения размера стека
+        :param stack_class: класс стека для тестирования
         """
         s = stack_class()
         assert len(s) == 0
@@ -75,30 +70,27 @@ class TestStack:
 
     def test_pop_empty(self, stack_class: Any) -> None:
         """
-        Тест извлечения из пустого стека.
-        :param stack_class: Класс стека для тестирования.
-        :return: None.
-        :raises ValueError: Если стек пуст.
+        Тест извлечения из пустого стека
+        :param stack_class: класс стека для тестирования
+        :raises ValueError: если стек пуст
         """
         with pytest.raises(ValueError):
             stack_class().pop()
 
     def test_peek_empty(self, stack_class: Any) -> None:
         """
-        Тест просмотра пустого стека.
-        :param stack_class: Класс стека для тестирования.
-        :return: None.
-        :raises ValueError: Если стек пуст.
+        Тест просмотра пустого стека
+        :param stack_class: класс стека для тестирования
+        :raises ValueError: если стек пуст
         """
         with pytest.raises(ValueError):
             stack_class().peek()
 
     def test_min_empty(self, stack_class: Any) -> None:
         """
-        Тест получения минимума из пустого стека.
-        :param stack_class: Класс стека для тестирования.
-        :return: None.
-        :raises ValueError: Если стек пуст.
+        Тест получения минимума из пустого стека
+        :param stack_class: класс стека для тестирования
+        :raises ValueError: если стек пуст
         """
         with pytest.raises(ValueError):
             stack_class().min()

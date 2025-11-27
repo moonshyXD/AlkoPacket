@@ -7,9 +7,8 @@ class TestCases:
     @staticmethod
     def _set_seed(seed: int | None = None) -> None:
         """
-        Устанавливает seed для генератора случайных чисел.
-        :param seed: Значение seed или None.
-        :return: None.
+        Устанавливает seed для random
+        :param seed: значение seed или None
         """
         if seed is not None:
             random.seed(seed)
@@ -23,13 +22,13 @@ class TestCases:
         seed: int | None = None,
     ) -> list[int]:
         """
-        Генерирует массив случайных целых чисел.
-        :param n: Размер массива.
-        :param lo: Нижняя граница значений.
-        :param hi: Верхняя граница значений.
-        :param distinct: Уникальность всех элементов.
-        :param seed: Значение seed для детерминированной генерации.
-        :return: Список случайных целых чисел.
+        Генерирует случайные целые числа
+        :param n: размер массива
+        :param lo: нижняя граница
+        :param hi: верхняя граница
+        :param distinct: делать ли все уникальными
+        :param seed: seed для воспроизводимости
+        :return: список случайных чисел
         """
         TestCases._set_seed(seed)
         if distinct and n > (hi - lo + 1):
@@ -48,12 +47,12 @@ class TestCases:
         n: int, lo: float = 0.0, hi: float = 1.0, seed: int | None = None
     ) -> list[float]:
         """
-        Генерирует массив случайных вещественных чисел.
-        :param n: Размер массива.
-        :param lo: Нижняя граница значений.
-        :param hi: Верхняя граница значений.
-        :param seed: Значение seed для детерминированной генерации.
-        :return: Список случайных вещественных чисел.
+        Генерирует случайные float-ы
+        :param n: размер массива
+        :param lo: нижняя граница
+        :param hi: верхняя граница
+        :param seed: seed для воспроизводимости
+        :return: список случайных вещественных чисел
         """
         TestCases._set_seed(seed)
         return [random.uniform(lo, hi) for _ in range(n)]
@@ -63,11 +62,11 @@ class TestCases:
         n: int, swaps: int, seed: int | None = None
     ) -> list[int]:
         """
-        Генерирует почти отсортированный массив.
-        :param n: Размер массива.
-        :param swaps: Количество случайных перестановок.
-        :param seed: Значение seed для детерминированной генерации.
-        :return: Почти отсортированный список целых чисел.
+        Создаёт почти отсортированный массив
+        :param n: размер массива
+        :param swaps: количество случайных перестановок
+        :param seed: seed для воспроизводимости
+        :return: почти отсортированный список
         """
         TestCases._set_seed(seed)
         array = list(range(n))
@@ -81,9 +80,9 @@ class TestCases:
     @staticmethod
     def reverse_sorted(n: int) -> list[int]:
         """
-        Генерирует массив, отсортированный по убыванию.
-        :param n: Размер массива.
-        :return: Список целых чисел в порядке от n до 1.
+        Создаёт массив отсортированный по убыванию
+        :param n: размер массива
+        :return: числа от n-1 до 0
         """
         return list(range(n - 1, -1, -1))
 
@@ -92,11 +91,11 @@ class TestCases:
         n: int, k_unique: int = 5, seed: int | None = None
     ) -> list[int]:
         """
-        Генерирует массив с большим количеством повторяющихся значений.
-        :param n: Размер массива.
-        :param k_unique: Количество уникальных значений.
-        :param seed: Значение seed для детерминированной генерации.
-        :return: Список целых чисел с дубликатами.
+        Много дублей в массиве
+        :param n: размер массива
+        :param k_unique: сколько уникальных значений
+        :param seed: seed для воспроизводимости
+        :return: список с повторениями
         """
         TestCases._set_seed(seed)
         values = list(range(k_unique))

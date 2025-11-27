@@ -11,22 +11,28 @@ class CountingSort(BaseSort):
         cmp: Callable[[Any, Any], int] | None = None,
     ) -> list[Any]:
         """
-        Выполняет сортировку подсчетом.
-        :param arr: Массив для сортировки.
-        :param key: Ключ сравнения эелементов.
-        :param cmp: Компаратор сравнения элементов.
-        :return: Отсортированный массив.
+        Сортирует подсчётом
+        :param arr: массив для сортировки
+        :param key: функция ключа
+        :param cmp: компаратор
+        :return: отсортированный массив
         """
         if not arr:
             return []
 
-        keys = [key(item) if key else item for item in arr]
+        keys: list[int] = []
+        for i in arr:
+            if key:
+                keys.append(key(i))
+            else:
+                keys.append(i)
+
         min_val = min(keys)
         max_val = max(keys)
         count_range = max_val - min_val + 1
         count: list[list[Any]] = [[] for _ in range(count_range)]
-        for i, item in enumerate(arr):
-            k = keys[i] - min_val
+        for index, item in enumerate(arr):
+            k = keys[index] - min_val
             count[k].append(item)
 
         result: list[Any] = []

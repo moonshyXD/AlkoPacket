@@ -12,12 +12,12 @@ class BucketSort(BaseSort):
         buckets: int | None = None,
     ) -> list[Any]:
         """
-        Выполняет блочную сортировку.
-        :param arr: Массив для сортировки.
-        :param key: Ключ сравнения эелементов.
-        :param cmp: Компаратор сравнения элементов.
-        :param buckets: Количество блоков для разделения массива.
-        :return: Отсортированный массив.
+        Выполняет блочную сортировку
+        :param arr: массив для сортировки
+        :param key: ключ сравнения элементов
+        :param cmp: компаратор сравнения элементов
+        :param buckets: количество блоков для разделения массива
+        :return: отсортированный массив
         """
         if buckets is None:
             buckets = 10
@@ -35,11 +35,11 @@ class BucketSort(BaseSort):
             bucket_number = min(int(normalized * buckets), buckets - 1)
             array_buckets[bucket_number].append(item)
 
-        sorted_array: list[float] = []
+        sorted_arr: list[float] = []
         for bucket in array_buckets:
-            sorted_array.extend(BucketSort._insertion_sort(bucket, key, cmp))
+            sorted_arr.extend(BucketSort._insertion_sort(bucket, key, cmp))
 
-        return sorted_array
+        return sorted_arr
 
     @staticmethod
     def _insertion_sort(
@@ -48,11 +48,11 @@ class BucketSort(BaseSort):
         cmp: Callable[[Any, Any], int] | None = None,
     ) -> list[float]:
         """
-        Сортирует массив внутри одного блока методом вставок.
-        :param arr: Список чисел для сортировки внутри блока.
-        :param key: Функция извлечения ключа сравнения из элемента.
-        :param cmp: Функция-компаратор для сравнения двух элементов.
-        :return: Отсортированный список.
+        Сортирует блок вставками
+        :param arr: числа для сортировки в блоке
+        :param key: функция ключа сравнения
+        :param cmp: функция компаратора
+        :return: отсортированный список
         """
         for a in range(1, len(arr)):
             b = a

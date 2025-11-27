@@ -6,31 +6,29 @@ from src.utils.base import BaseStack, Node
 class StackOnLinkedList(BaseStack):
     def __init__(self) -> None:
         """
-        Инициализирует стек на основе связного списка.
-        :return: None.
+        Создает пустой стек на основе связного списка
         """
         self.head: Node | None = None
         self.size: int = 0
 
     def push(self, value: int) -> None:
         """
-        Добавляет элемент на вершину стека.
-        :param value: Элемент для добавления.
-        :return: None.
+        Добавляет элемент на вершину стека
+        :param value: элемент для добавления
         """
         if self.head is None:
-            min_value = value
+            min_val = value
         else:
-            min_value = min(value, self.head.cur_min)
+            min_val = min(value, self.head.cur_min)
 
-        self.head = Node(value, min_value, self.head)
+        self.head = Node(value, min_val, self.head)
         self.size += 1
 
     def pop(self) -> int:
         """
-        Извлекает и удаляет элемент с вершины стека.
-        :return: Верхний элемент стека.
-        :raises ValueError: Если стек пуст.
+        Удаляет и возвращает верхний элемент стека
+        :return: верхний элемент стека
+        :raises ValueError: если стек пуст
         """
         if self.head is None:
             raise ValueError("Стэк пуст")
@@ -42,16 +40,16 @@ class StackOnLinkedList(BaseStack):
 
     def is_empty(self) -> bool:
         """
-        Проверяет, пуст ли стек.
-        :return: True, если стек пуст, иначе False.
+        Проверяет, пуст ли стек
+        :return: True если пуст, иначе False
         """
         return self.head is None
 
     def peek(self) -> int:
         """
-        Возвращает верхний элемент стека без удаления.
-        :return: Верхний элемент стека.
-        :raises ValueError: Если стек пуст.
+        Возвращает верхний элемент без удаления
+        :return: верхний элемент стека
+        :raises ValueError: если стек пуст
         """
         if self.head is None:
             raise ValueError("Стэк пуст")
@@ -60,16 +58,16 @@ class StackOnLinkedList(BaseStack):
 
     def __len__(self) -> int:
         """
-        Возвращает размер стека.
-        :return: Количество элементов в стеке.
+        Возвращает количество элементов в стеке
+        :return: размер стека
         """
         return self.size
 
     def min(self) -> int:
         """
-        Возвращает минимальный элемент в стеке.
-        :return: Минимальный элемент в стеке.
-        :raises ValueError: Если стек пуст.
+        Возвращает минимальный элемент в стеке
+        :return: минимальный элемент
+        :raises ValueError: если стек пуст
         """
         if self.head is None:
             raise ValueError("Стэк пуст")
@@ -80,17 +78,15 @@ class StackOnLinkedList(BaseStack):
 class StackOnList(BaseStack):
     def __init__(self) -> None:
         """
-        Инициализирует стек на основе списка.
-        :return: None.
+        Создает пустой стек на основе списка
         """
         self.stack: list[int] = []
         self.min_values: list[int] = []
 
     def push(self, value: int) -> None:
         """
-        Добавляет элемент на вершину стека.
-        :param value: Элемент для добавления.
-        :return: None.
+        Добавляет элемент на вершину стека
+        :param value: элемент для добавления
         """
         if not self.min_values or value <= self.min_values[-1]:
             self.min_values.append(value)
@@ -99,9 +95,9 @@ class StackOnList(BaseStack):
 
     def pop(self) -> int:
         """
-        Извлекает и удаляет элемент с вершины стека.
-        :return: Верхний элемент стека.
-        :raises ValueError: Если стек пуст.
+        Удаляет и возвращает верхний элемент стека
+        :return: верхний элемент стека
+        :raises ValueError: если стек пуст
         """
         if not self.stack:
             raise ValueError("Стэк пуст")
@@ -113,16 +109,16 @@ class StackOnList(BaseStack):
 
     def is_empty(self) -> bool:
         """
-        Проверяет, пуст ли стек.
-        :return: True, если стек пуст, иначе False.
+        Проверяет, пуст ли стек
+        :return: True если пуст, иначе False
         """
         return len(self.stack) == 0
 
     def peek(self) -> int:
         """
-        Возвращает верхний элемент стека без удаления.
-        :return: Верхний элемент стека.
-        :raises ValueError: Если стек пуст.
+        Возвращает верхний элемент без удаления
+        :return: верхний элемент стека
+        :raises ValueError: если стек пуст
         """
         if not self.stack:
             raise ValueError("Стэк пуст")
@@ -131,16 +127,16 @@ class StackOnList(BaseStack):
 
     def __len__(self) -> int:
         """
-        Возвращает размер стека.
-        :return: Количество элементов в стеке.
+        Возвращает количество элементов в стеке
+        :return: размер стека
         """
         return len(self.stack)
 
     def min(self) -> int:
         """
-        Возвращает минимальный элемент в стеке.
-        :return: Минимальный элемент в стеке.
-        :raises ValueError: Если стек пуст.
+        Возвращает минимальный элемент в стеке
+        :return: минимальный элемент
+        :raises ValueError: если стек пуст
         """
         if not self.min_values:
             raise ValueError("Стэк пуст")
@@ -151,8 +147,7 @@ class StackOnList(BaseStack):
 class StackOnQueue(BaseStack):
     def __init__(self) -> None:
         """
-        Инициализирует стек на основе двух очередей.
-        :return: None.
+        Создает стек на основе двух очередей
         """
         self.queue1: deque[int] = deque()
         self.queue2: deque[int] = deque()
@@ -160,9 +155,8 @@ class StackOnQueue(BaseStack):
 
     def push(self, value: int) -> None:
         """
-        Добавляет элемент на вершину стека.
-        :param value: Элемент для добавления.
-        :return: None.
+        Добавляет элемент на вершину стека
+        :param value: элемент для добавления
         """
         self.queue1.append(value)
         if not self.min_values or value <= self.min_values[-1]:
@@ -170,9 +164,9 @@ class StackOnQueue(BaseStack):
 
     def pop(self) -> int:
         """
-        Извлекает и удаляет элемент с вершины стека.
-        :return: Верхний элемент стека.
-        :raises ValueError: Если стек пуст.
+        Удаляет и возвращает верхний элемент стека
+        :return: верхний элемент стека
+        :raises ValueError: если стек пуст
         """
         if not self.queue1:
             raise ValueError("Стэк пуст")
@@ -189,16 +183,16 @@ class StackOnQueue(BaseStack):
 
     def is_empty(self) -> bool:
         """
-        Проверяет, пуст ли стек.
-        :return: True, если стек пуст, иначе False.
+        Проверяет, пуст ли стек
+        :return: True если пуст, иначе False
         """
         return len(self.queue1) == 0
 
     def peek(self) -> int:
         """
-        Возвращает верхний элемент стека без удаления.
-        :return: Верхний элемент стека.
-        :raises ValueError: Если стек пуст.
+        Возвращает верхний элемент без удаления
+        :return: верхний элемент стека
+        :raises ValueError: если стек пуст
         """
         if not self.queue1:
             raise ValueError("Стэк пуст")
@@ -213,16 +207,16 @@ class StackOnQueue(BaseStack):
 
     def __len__(self) -> int:
         """
-        Возвращает размер стека.
-        :return: Количество элементов в стеке.
+        Возвращает количество элементов в стеке
+        :return: размер стека
         """
         return len(self.queue1)
 
     def min(self) -> int:
         """
-        Возвращает минимальный элемент в стеке.
-        :return: Минимальный элемент в стеке.
-        :raises ValueError: Если стек пуст.
+        Возвращает минимальный элемент в стеке
+        :return: минимальный элемент
+        :raises ValueError: если стек пуст
         """
         if not self.min_values:
             raise ValueError("Стэк пуст")

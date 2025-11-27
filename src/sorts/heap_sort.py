@@ -11,11 +11,11 @@ class HeapSort(BaseSort):
         cmp: Callable[[Any, Any], int] | None = None,
     ) -> list[Any]:
         """
-        Выполняет пирамидальную сортировку.
-        :param arr: Массив для сортировки.
-        :param key: Ключ сравнения эелементов.
-        :param cmp: Компаратор сравнения элементов.
-        :return: Отсортированный массив.
+        Сортирует пирамидой
+        :param arr: массив для сортировки
+        :param key: ключ сравнения
+        :param cmp: компаратор
+        :return: отсортированный массив
         """
         arr = arr.copy()
         n = len(arr)
@@ -37,13 +37,12 @@ class HeapSort(BaseSort):
         cmp: Callable[[Any, Any], int] | None = None,
     ) -> None:
         """
-        Преобразует поддерево в пирамиду.
-        :param arr: Массив для преобразования.
-        :param heap_size: Размер пирамиды.
-        :param root_index: Индекс корня поддерева.
-        :param key: Функция извлечения ключа сравнения из элемента.
-        :param cmp: Функция-компаратор для сравнения двух элементов.
-        :return: None.
+        Делает кучу из поддерева
+        :param arr: массив
+        :param heap_size: размер кучи
+        :param root_index: корень поддерева
+        :param key: ключ сравнения
+        :param cmp: компаратор
         """
         largest = root_index
         left = 2 * root_index + 1
