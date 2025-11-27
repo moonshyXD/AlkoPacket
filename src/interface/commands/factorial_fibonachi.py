@@ -1,6 +1,9 @@
 import typer
 
 from src.interface.config import factorial_map, fibonacci_map
+from src.utils.logger import Logger
+
+Logger.setup_logging()
 
 
 def run_factorial() -> None:
@@ -15,10 +18,17 @@ def run_factorial() -> None:
     factorial_type = factorial_map.get(method)
     if not factorial_type:
         typer.echo(f"Ошибка: Метод {method} не найден", err=True)
+        Logger.failure_execution(ValueError(f"Unknown method: {method}"))
         return
 
-    result = factorial_type(n)
-    typer.echo(f"Результат: {result}")
+    try:
+        Logger.start_execution(f"Factorial-{method}({n})")
+        result = factorial_type(n)
+        typer.echo(f"Результат: {result}")
+        Logger.success_execution(f"Factorial-{method}({n}) = {result}")
+    except Exception as e:
+        Logger.failure_execution(e)
+        typer.echo(f"Ошибка: {e}", err=True)
 
 
 def run_fibonacci() -> None:
@@ -33,7 +43,14 @@ def run_fibonacci() -> None:
     fibonacci_type = fibonacci_map.get(method)
     if not fibonacci_type:
         typer.echo(f"Ошибка: Метод {method} не найден", err=True)
+        Logger.failure_execution(ValueError(f"Unknown method: {method}"))
         return
 
-    result = fibonacci_type(n)
-    typer.echo(f"Результат: {result}")
+    try:
+        Logger.start_execution(f"Fibonacci-{method}({n})")
+        result = fibonacci_type(n)
+        typer.echo(f"Результат: {result}")
+        Logger.success_execution(f"Fibonacci-{method}({n}) = {result}")
+    except Exception as e:
+        Logger.failure_execution(e)
+        typer.echo(f"Ошибка: {e}", err=True)

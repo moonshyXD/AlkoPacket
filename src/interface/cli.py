@@ -50,7 +50,8 @@ def hello() -> None:
         "help": show_help,
     }
 
-    while True:
+    command = None
+    while command != "exit":
         typer.echo("\nЧто вы хотите использовать (введите только название):")
         typer.echo("1. sorts")
         typer.echo("2. benchmark")

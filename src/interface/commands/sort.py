@@ -1,17 +1,21 @@
+import time
 from typing import Any, Callable
 
 import typer
 
 from src.interface.config import cmp_map, key_map, sort_command_map
+from src.utils.logger import Logger
 from src.utils.test_cases import TestCases
+
+Logger.setup_logging()
 
 
 def _get_array() -> list[Any] | None:
     """
-    Получает массив от пользователя.
+    Интерактивно получает массив от пользователя.
     :return: Массив данных или None при ошибке ввода.
     """
-    typer.echo("Как получить массив для сортировки (введите цифру)?")
+    typer.echo("Как получить массив для сортировки?")
     typer.echo("1. Ввести вручную")
     typer.echo("2. Сгенерировать из тест-кейса")
     input_choice = typer.prompt("Ваш выбор", type=int)
@@ -23,9 +27,8 @@ def _get_array() -> list[Any] | None:
         except ValueError:
             typer.echo("Ошибка: Элементы должны быть числами", err=True)
             return None
-
     elif input_choice == 2:
-        typer.echo("Выберите тип генерации массива (введите цифру):")
+        typer.echo("Выберите тип генерации массива:")
         typer.echo("1. Случайный массив целых чисел")
         typer.echo("2. Случайный массив вещественных чисел")
         typer.echo("3. Почти отсортированный")
@@ -35,9 +38,7 @@ def _get_array() -> list[Any] | None:
         n = typer.prompt("Размер массива (n)", type=int)
 
         use_seed_input = typer.prompt(
-            "Использовать seed для воспроизводимости? [y/n]",
-            default="n",
-            show_default=False,
+            "Использовать seed для воспроизводимости? [y/n]"
         )
         seed = None
         if use_seed_input.lower() in ["y", "yes"]:
@@ -60,9 +61,7 @@ def _get_array() -> list[Any] | None:
             )
 
             distinct_input = typer.prompt(
-                "Генерировать только уникальные элементы? [y/n]",
-                default="n",
-                show_default=False,
+                "Генерировать только уникальные элементы? [y/n]"
             )
             distinct = distinct_input.lower() in ["y", "yes"]
 
@@ -71,6 +70,7 @@ def _get_array() -> list[Any] | None:
                     n, lo, hi, distinct=distinct, seed=seed
                 )
             except Exception as e:
+                Logger.failure_execution(e)
                 typer.echo(f"Ошибка генерации: {e}", err=True)
                 return None
 
@@ -116,7 +116,7 @@ def _get_array() -> list[Any] | None:
 
 def run_sorts() -> None:
     """
-    Запускает выбор и выполнение сортировки.
+    Запускает интерактивный выбор и выполнение сортировки.
     :return: None.
     """
     sort_type = typer.prompt(
@@ -127,6 +127,7 @@ def run_sorts() -> None:
     sort_command = sort_command_map.get(sort_type)
     if not sort_command:
         typer.echo(f"Ошибка: Сортировка {sort_type} не найдена", err=True)
+        Logger.failure_execution(ValueError(f"Unknown sort: {sort_type}"))
         return
 
     supports_key_cmp = sort_type not in ["Radix-sort", "Counting-sort"]
@@ -161,7 +162,6 @@ def run_sorts() -> None:
                 f"Ключ '{key_type}' не найден, используется default",
                 err=True,
             )
-
         if cmp is None and cmp_type not in ["", "default"]:
             typer.echo(
                 f"Компаратор '{cmp_type}' не найден, используется default",
@@ -175,18 +175,30 @@ def run_sorts() -> None:
     if sort_type == "Bucket-sort":
         try:
             arr = [float(x) for x in arr]
-        except (ValueError, TypeError):
+        except (ValueError, TypeError) as e:
             typer.echo("Bucket-sort требует числовые данные.", err=True)
+            Logger.failure_execution(e)
             return
 
     try:
+        Logger.start_execution(f"{sort_type} (size: {len(arr)})")
+        start_time = time.perf_counter()
+
         if supports_key_cmp:
             result = sort_command(arr, key=key, cmp=cmp)
         else:
             result = sort_command(arr)
 
+        end_time = time.perf_counter()
+        elapsed = end_time - start_time
+
+        Logger.success_execution(
+            f"{sort_type} (size: {len(arr)}, time: {elapsed:.6f}s)"
+        )
         typer.echo(
             f"Результат сортировки (первые 20 элементов): {result[:20]}"
         )
-    except TypeError as e:
-        typer.echo(f"Ошибка сортировки: {e}", err=True)
+        typer.echo(f"Время выполнения: {elapsed:.6f} секунд")
+    except Exception as e:
+        Logger.failure_execution(e)
+        typer.echo(f"Ошибка: {e}", err=True)

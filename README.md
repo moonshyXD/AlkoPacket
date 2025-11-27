@@ -26,7 +26,7 @@ make setup
 | `data_structures/` | Собственные реализации очередей и стеков базовыми операциями |
 | `factorial_fibonachi/` | Модули для вычисления факториалов и чисел Фибоначчи различными методами (рекурсия, итерация) |
 | `interface/` | CLI-интерфейс, обработчики команд и конфигурация приложения |
-| `leetcode_hackerrank/` | Готовые решения типовых алгоритмических задач с [Leetcode](https://leetcode.com/) и [Hackerrank](https://www.hackerrank.com/)
+| `leetcode_hackerrank/` | Решения алгоритмических задач с [Leetcode](https://leetcode.com/) и [Hackerrank](https://www.hackerrank.com/)
 | `sorts/` | Реализация классических алгоритмов сортировки |
 | `utils/benchmarks.py` | Инструменты для автоматического измерения и сравнения производительности алгоритмов |
 | `utils/test_cases.py` | Генераторы тестовых данных различной сложности и размера |

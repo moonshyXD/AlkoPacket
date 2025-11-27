@@ -39,38 +39,3 @@ class Benchmarks:
                 results[algo_name][array_name] = time_spended
 
         return results
-
-    def benchmark_factorial_fibonacci(
-        self,
-        functions: dict[str, Callable[[int], int]],
-        n_values: list[int],
-    ) -> dict[str, dict[int, float]]:
-        """
-        Бенчмарк функций вычисления факториала и чисел Фибоначчи.
-        :param functions: Словарь, название функции - функция вычисления.
-        :param n_values: Список значений n для тестирования.
-        :return: Словарь с результатами, название функции - словарь {n: время}.
-        """
-        results: dict[str, dict[int, float]] = {}
-        for func_name, func in functions.items():
-            results[func_name] = {}
-            for n in n_values:
-                time_spended = self.timeit_once(func, n)
-                results[func_name][n] = time_spended
-
-        return results
-
-    def benchmark_data_structures(
-        self, structures: dict[str, Callable[[], None]]
-    ) -> dict[str, float]:
-        """
-        Бенчмарк структур данных.
-        :param structures: Словарь, название структуры - функция тестирования.
-        :return: Словарь с результатами, название структуры - время выполнения.
-        """
-        results: dict[str, float] = {}
-        for struct_name, struct_func in structures.items():
-            time_spended = self.timeit_once(struct_func)
-            results[struct_name] = time_spended
-
-        return results

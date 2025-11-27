@@ -1,0 +1,4 @@
+[2025-11-27 16:07:54] INFO: STARTED: Factorial-iterative(10)
+[2025-11-27 16:07:54] INFO: SUCCESS: Factorial-iterative(10) = 3628800
+[2025-11-27 16:10:27] INFO: STARTED: Benchmark (n=1000)
+[2025-11-27 16:10:27] INFO: SUCCESS: Benchmark (n=1000)
