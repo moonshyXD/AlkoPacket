@@ -18,18 +18,17 @@ class BaseSort(ABC):
         :param cmp: компаратор
         :return: -1 если a < b, 0 если равны, 1 если a > b
         """
+        if key:
+            a_key = key(a)
+            b_key = key(b)
+            if cmp:
+                return cmp(a_key, b_key)
+            return -1 if a_key < b_key else (1 if a_key > b_key else 0)
+
         if cmp:
             return cmp(a, b)
 
-        a_key = key(a) if key else a
-        b_key = key(b) if key else b
-        if a_key < b_key:
-            return -1
-
-        if a_key > b_key:
-            return 1
-
-        return 0
+        return -1 if a < b else (1 if a > b else 0)
 
     @staticmethod
     @abstractmethod
