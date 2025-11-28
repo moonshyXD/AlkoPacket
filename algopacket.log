@@ -10,3 +10,19 @@
 [2025-11-27 22:29:03] INFO: SUCCESS: Fibonacci-iterative(10) = 55
 [2025-11-27 22:29:20] INFO: STARTED: Factorial-iterative(10)
 [2025-11-27 22:29:20] INFO: SUCCESS: Factorial-iterative(10) = 3628800
+[2025-11-28 17:00:46] INFO: STARTED: Bubble-sort (size: 10)
+[2025-11-28 17:00:46] INFO: SUCCESS: Bubble-sort (size: 10, time: 0.000012s)
+[2025-11-28 17:01:44] INFO: STARTED: Quick-sort (size: 10)
+[2025-11-28 17:01:44] INFO: SUCCESS: Quick-sort (size: 10, time: 0.000026s)
+[2025-11-28 17:01:50] INFO: STARTED: Benchmark (n=1000)
+[2025-11-28 17:01:50] INFO: SUCCESS: Benchmark (n=1000)
+[2025-11-28 17:07:05] INFO: STARTED: Bubble-sort (size: 10)
+[2025-11-28 17:07:05] INFO: SUCCESS: Bubble-sort (size: 10, time: 0.000033s)
+[2025-11-28 17:09:41] INFO: STARTED: Benchmark (n=100)
+[2025-11-28 17:09:41] INFO: SUCCESS: Benchmark (n=100)
+[2025-11-28 17:09:51] INFO: STARTED: Factorial-iterative(2)
+[2025-11-28 17:09:51] INFO: SUCCESS: Factorial-iterative(2) = 2
+[2025-11-28 17:10:00] INFO: STARTED: Fibonacci-recursive(2)
+[2025-11-28 17:10:00] INFO: SUCCESS: Fibonacci-recursive(2) = 1
+[2025-11-28 17:10:10] INFO: STARTED: Stack-queue
+[2025-11-28 17:10:37] INFO: STARTED: Queue-list

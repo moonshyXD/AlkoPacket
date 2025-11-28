@@ -17,10 +17,12 @@ def run_stack() -> None:
         default="list",
         show_default=False,
     )
+
     stack_cls = stack_map.get(stack_type)
+
     if not stack_cls:
         typer.echo(f"Ошибка: Реализация {stack_type} не найдена", err=True)
-        Logger.failure_execution(ValueError(f"Unknown type: {stack_type}"))
+        Logger.failure_execution(ValueError(f"Неизвестный тип: {stack_type}"))
         return
 
     s = stack_cls()
@@ -65,10 +67,12 @@ def run_queue() -> None:
         default="list",
         show_default=False,
     )
+
     queue_cls = queue_map.get(queue_type)
+
     if not queue_cls:
         typer.echo(f"Ошибка: Реализация {queue_type} не найдена", err=True)
-        Logger.failure_execution(ValueError(f"Unknown type: {queue_type}"))
+        Logger.failure_execution(ValueError(f"Неизвестный тип: {queue_type}"))
         return
 
     q = queue_cls()

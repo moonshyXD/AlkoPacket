@@ -14,9 +14,10 @@ def _get_array() -> list[Any] | None:
     """
     Интерактивно получает массив от пользователя
     """
-    typer.echo("Как получить массив для сортировки?")
+    typer.echo("Как получить массив для сортировки? (введите цифру)")
     typer.echo("1. Ввести вручную")
     typer.echo("2. Сгенерировать из тест-кейса")
+
     input_choice = typer.prompt("Ваш выбор", type=int)
 
     if input_choice == 1:
@@ -26,19 +27,21 @@ def _get_array() -> list[Any] | None:
         except ValueError:
             typer.echo("Ошибка: Элементы должны быть числами", err=True)
             return None
+
     elif input_choice == 2:
-        typer.echo("Выберите тип генерации массива:")
+        typer.echo("Выберите тип генерации массива (введите цифру):")
         typer.echo("1. Случайный массив целых чисел")
         typer.echo("2. Случайный массив вещественных чисел")
         typer.echo("3. Почти отсортированный")
         typer.echo("4. Отсортированный в обратном порядке")
         typer.echo("5. Много дубликатов")
-        gen_choice = typer.prompt("Номер", type=int)
-        n = typer.prompt("Размер массива (n)", type=int)
 
+        gen_choice = typer.prompt("Тип: ", type=int)
+        n = typer.prompt("Размер массива (n)", type=int)
         use_seed_input = typer.prompt(
             "Использовать seed для воспроизводимости? [y/n]"
         )
+
         seed = None
         if use_seed_input.lower() in ["y", "yes"]:
             seed = typer.prompt(
@@ -122,21 +125,26 @@ def run_sorts() -> None:
         "[Bubble-sort/Bucket-sort/Counting-sort/"
         "Heap-sort/Quick-sort/Radix-sort]"
     )
+
     sort_command = sort_command_map.get(sort_type)
+
     if not sort_command:
         typer.echo(f"Ошибка: Сортировка {sort_type} не найдена", err=True)
-        Logger.failure_execution(ValueError(f"Unknown sort: {sort_type}"))
+        Logger.failure_execution(
+            ValueError(f"Неизвестная сортировка: {sort_type}")
+        )
         return
 
     supports_key_cmp = sort_type not in ["Radix-sort", "Counting-sort"]
+
     key: Callable[[Any], Any] | None = None
     cmp: Callable[[Any, Any], int] | None = None
 
     if supports_key_cmp:
-        typer.echo("\nВведите ключ [default, abs, len]")
+        typer.echo("\nВведите ключ [default, abs]")
         typer.echo("default - без ключа (по умолчанию)")
-        typer.echo("abs     - по абсолютному значению (для чисел)")
-        typer.echo("len     - по длине (только для строк/списков)")
+        typer.echo("abs - по абсолютному значению (для чисел)")
+
         key_type = typer.prompt(
             "Введите название ключа",
             default="default",
@@ -146,6 +154,7 @@ def run_sorts() -> None:
         typer.echo("\nВведите компаратор [default, reverse]")
         typer.echo("default - по возрастанию (по умолчанию)")
         typer.echo("reverse - по убыванию")
+
         cmp_type = typer.prompt(
             "Введите название компаратора",
             default="default",
@@ -160,6 +169,7 @@ def run_sorts() -> None:
                 f"Ключ '{key_type}' не найден, используется default",
                 err=True,
             )
+
         if cmp is None and cmp_type not in ["", "default"]:
             typer.echo(
                 f"Компаратор '{cmp_type}' не найден, используется default",
@@ -193,6 +203,7 @@ def run_sorts() -> None:
         Logger.success_execution(
             f"{sort_type} (size: {len(arr)}, time: {elapsed:.6f}s)"
         )
+
         typer.echo(
             f"Результат сортировки (первые 20 элементов): {result[:20]}"
         )

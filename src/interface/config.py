@@ -28,7 +28,6 @@ cmp_map: dict[str, Callable[[Any, Any], int] | None] = {
 key_map: dict[str, Callable[[Any], Any] | None] = {
     "default": None,
     "abs": abs,
-    "len": len,
 }
 
 sort_command_map: dict[str, Callable[..., list[Any]]] = {

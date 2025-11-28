@@ -11,13 +11,16 @@ def run_factorial() -> None:
     Вычисляет факториал числа
     """
     n = typer.prompt("Введите n", type=int)
+
     method = typer.prompt(
         "Метод [iterative/recursive]", default="iterative", show_default=False
     )
+
     factorial_type = factorial_map.get(method)
+
     if not factorial_type:
         typer.echo(f"Ошибка: Метод {method} не найден", err=True)
-        Logger.failure_execution(ValueError(f"Unknown method: {method}"))
+        Logger.failure_execution(ValueError(f"Неизвестный метод: {method}"))
         return
 
     try:
@@ -35,13 +38,16 @@ def run_fibonacci() -> None:
     Вычисляет число Фибоначчи
     """
     n = typer.prompt("Введите n", type=int)
+
     method = typer.prompt(
         "Метод [iterative/recursive]", default="iterative", show_default=False
     )
+
     fibonacci_type = fibonacci_map.get(method)
+
     if not fibonacci_type:
         typer.echo(f"Ошибка: Метод {method} не найден", err=True)
-        Logger.failure_execution(ValueError(f"Unknown method: {method}"))
+        Logger.failure_execution(ValueError(f"Неизвестный метод: {method}"))
         return
 
     try:

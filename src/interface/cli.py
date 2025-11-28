@@ -20,13 +20,13 @@ def show_help() -> None:
     :return: None.
     """
     typer.echo("\nСправка по командам:")
-    typer.echo("sorts     - Запуск сортировок")
+    typer.echo("sorts - Запуск сортировок")
     typer.echo("benchmark - Замер скорости работы сортировок")
     typer.echo("factorial - Вычисление факториала")
     typer.echo("fibonacci - Вычисление чисел Фибоначчи")
-    typer.echo("stack     - Работа со стеком")
-    typer.echo("queue     - Работа с очередью")
-    typer.echo("exit      - Выход из программы")
+    typer.echo("stack - Работа со стеком")
+    typer.echo("queue - Работа с очередью")
+    typer.echo("exit - Выход из программы")
 
 
 @app.command()
@@ -69,6 +69,7 @@ def hello() -> None:
             break
 
         handler = command_map.get(command)
+
         if handler:
             handler()
         else:
