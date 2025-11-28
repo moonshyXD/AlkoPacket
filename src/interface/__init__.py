@@ -1,6 +1,6 @@
 from src.interface.commands.benchmark import run_benchmark
 from src.interface.commands.data_structures import run_queue, run_stack
-from src.interface.commands.factorial_fibonachi import (
+from src.interface.commands.factorial_fibonacci import (
     run_factorial,
     run_fibonacci,
 )

@@ -10,8 +10,8 @@ from src.data_structures.stack import (
     StackOnList,
     StackOnQueue,
 )
-from src.factorial_fibonachi.factorial import Factorial
-from src.factorial_fibonachi.fibonachi import Fibonachi
+from src.factorial_fibonacci.factorial import Factorial
+from src.factorial_fibonacci.fibonacci import Fibonacci
 from src.sorts.bubble_sort import BubbleSort
 from src.sorts.bucket_sort import BucketSort
 from src.sorts.counting_sort import CountingSort
@@ -58,6 +58,6 @@ factorial_map: dict[str, Callable[[int], int]] = {
 }
 
 fibonacci_map: dict[str, Callable[[int], int]] = {
-    "iterative": Fibonachi.fibo,
-    "recursive": Fibonachi.fibo_recursive,
+    "iterative": Fibonacci.fibo,
+    "recursive": Fibonacci.fibo_recursive,
 }

@@ -1,4 +1,4 @@
-class Fibonachi:
+class Fibonacci:
     @staticmethod
     def fibo(n: int) -> int:
         """
@@ -30,6 +30,6 @@ class Fibonachi:
         if n in [0, 1]:
             return n
 
-        return Fibonachi.fibo_recursive(n - 1) + Fibonachi.fibo_recursive(
+        return Fibonacci.fibo_recursive(n - 1) + Fibonacci.fibo_recursive(
             n - 2
         )

@@ -2,7 +2,7 @@ from typing import Any
 
 import pytest
 
-from src.factorial_fibonachi.factorial import Factorial
+from src.factorial_fibonacci.factorial import Factorial
 
 
 @pytest.mark.parametrize(
