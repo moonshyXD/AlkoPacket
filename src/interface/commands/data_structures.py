@@ -85,11 +85,11 @@ def run_queue() -> None:
     }
 
     while (operation := typer.prompt("Операция")) != "exit":
-        try:
-            if operation == "exit":
-                Logger.success_execution(f"Queue-{queue_type}")
-                break
+        if operation == "exit":
+            Logger.success_execution(f"Queue-{queue_type}")
+            break
 
+        try:
             if operation == "enqueue":
                 value = typer.prompt("Значение", type=int)
                 q.enqueue(value)

@@ -1,4 +1,5 @@
 from functools import partial
+from typing import Any, Callable
 
 import typer
 
@@ -13,7 +14,7 @@ Logger.setup_logging()
 
 def run_benchmark() -> None:
     """
-    Бенчмаркит сортировки на разных типах массивов
+    Запускает бенчмарк сортировок
     """
     n = typer.prompt(
         "Размер массивов", type=int, default=1000, show_default=False
@@ -34,7 +35,7 @@ def run_benchmark() -> None:
 
     bench = Benchmarks()
 
-    int_algos = {}
+    int_algos: dict[str, Callable[[list[Any]], list[Any]]] = {}
     for name, func in sort_command_map.items():
         if name == "Bucket-sort":
             continue
@@ -55,16 +56,16 @@ def run_benchmark() -> None:
             for data_name, time_sec in dataset_res.items():
                 typer.echo(f"{algo:<20} | {data_name:<30} | {time_sec:.6f}")
 
-        bucket_res = bench.benchmark_sorts(
+        bucket_results = bench.benchmark_sorts(
             float_arrays, {"Bucket-sort": BucketSort.execute}
         )
-        for algo, dataset_res in bucket_res.items():
+        for algo, dataset_res in bucket_results.items():
             for data_name, time_sec in dataset_res.items():
                 typer.echo(f"{algo:<20} | {data_name:<30} | {time_sec:.6f}")
 
         Logger.success_execution(f"Benchmark (n={n})")
     except Exception as e:
         Logger.failure_execution(e)
-        typer.echo(f"Ошибка бенчмарка: {e}", err=True)
+        typer.echo(f"Ошибка при выполнении бенчмарка: {e}", err=True)
 
     typer.echo("-" * 70)
